@@ -167,7 +167,7 @@ const NewsPage = () => {
                   <td className={styles.tableCell} style={{ maxWidth: "250px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                     {blog.content}
                   </td>
-                  <td>{blog.categorynews_id?.name || "Không có danh mục"}</td>
+                
 
                   <td className={styles.tableCell}>
                     {blog.created_at ? new Date(blog.created_at).toLocaleDateString() : ""}
