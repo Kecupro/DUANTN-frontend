@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import AddToCart from '../components/AddToCart';
@@ -347,4 +347,10 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchPage />
+    </Suspense>
+  );
+}
