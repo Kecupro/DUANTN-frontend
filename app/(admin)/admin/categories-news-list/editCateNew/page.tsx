@@ -7,7 +7,7 @@ const EditCateNew = () => {
   const [categoryName, setCategoryName] = useState('Đồng hồ chính hãng Việt Nam	');
   const [status, setStatus] = useState('Công khai');
   const [selectedFile, setSelectedFile] = useState(null);
-  const [currentImage, setCurrentImage] = useState('tech-news.jpg'); // Ảnh hiện tại
+  // const [currentImage, setCurrentImage] = useState('tech-news.jpg'); // Ảnh hiện tại
   const [activeTab, setActiveTab] = useState('preview');
   const [createdDate] = useState('15/03/2024'); // Ngày xuất bảng (không thể sửa)
   const [updatedDate, setUpdatedDate] = useState('09/06/2025'); // Ngày cập nhật
