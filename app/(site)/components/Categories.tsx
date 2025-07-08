@@ -10,10 +10,11 @@ import { IBrand } from "../cautrucdata";
 export default function Categories() {
 	const [brands, setBrands] = useState<IBrand[]>([]);
 	const containerRef = useRef<HTMLDivElement>(null);
+	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 	// Fetch danh sách thương hiệu
 	useEffect(() => {
-		fetch("http://localhost:3000/api/brand")
+		fetch(`${API_URL}/api/brand`)
 			.then((res) => res.json())
 			.then((data) => setBrands(data))
 			.catch((err) => console.error("Lỗi fetch brand:", err));

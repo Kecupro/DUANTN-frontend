@@ -40,6 +40,8 @@ export default function News() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -59,7 +61,7 @@ export default function News() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/category-news');
+      const response = await axios.get(`${API_URL}/api/category-news`);
       setCategories(response.data);
     } catch (err) {
       console.error('Error fetching categories:', err);
@@ -70,10 +72,10 @@ export default function News() {
     try {
       setIsTransitioning(true);
       
-      let url = `http://localhost:3000/api/news?page=${currentPage}&limit=6`;
+      let url = `${API_URL}/api/news?page=${currentPage}&limit=6`;
       
       if (selectedCategory !== 'all') {
-        url = `http://localhost:3000/api/news/category/${selectedCategory}?page=${currentPage}&limit=6`;
+        url = `${API_URL}/api/news/category/${selectedCategory}?page=${currentPage}&limit=6`;
       }
       
       const response = await axios.get(url);

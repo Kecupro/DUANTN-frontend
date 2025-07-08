@@ -22,9 +22,10 @@ export default function ProductSale() {
     const [products, setProducts] = useState<IProduct[]>([]);
     const [wishlistStatus, setWishlistStatus] = useState<{[key: string]: boolean}>({});
     const { user } = useAuth();
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/sp_giam_gia")
+        fetch(`${API_URL}/api/sp_giam_gia`)
             .then((res) => res.json())
             .then((data) => setProducts(data))
             .catch((err) => console.error("Lỗi fetch sp:", err));
@@ -36,7 +37,7 @@ export default function ProductSale() {
             const token = localStorage.getItem("token");
             if (token) {
                 try {
-                    const res = await fetch("http://localhost:3000/user/wishlist", {
+                    const res = await fetch(`${API_URL}/user/wishlist`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }

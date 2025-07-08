@@ -19,6 +19,8 @@ interface News {
   };
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function NewsDetail() {
   const params = useParams();
   const [news, setNews] = useState<News | null>(null);
@@ -32,7 +34,7 @@ export default function NewsDetail() {
 
   const fetchNewsDetail = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/news/${params.id}`);
+      const response = await axios.get(`${API_URL}/api/news/${params.id}`);
       setNews(response.data);
       
       // Kiểm tra xem đã xem tin tức này chưa
@@ -56,7 +58,7 @@ export default function NewsDetail() {
   const incrementViewCount = async () => {
     try {
       // Gọi API để tăng lượt xem
-      const response = await axios.post(`http://localhost:3000/api/news/${params.id}/increment-view`);
+      const response = await axios.post(`${API_URL}/api/news/${params.id}/increment-view`);
       
       // Cập nhật số lượt xem trong state với giá trị từ server
       if (response.data.views) {

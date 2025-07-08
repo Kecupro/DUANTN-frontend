@@ -29,6 +29,8 @@ const tabItems: TabItem[] = [
   { key: "voucher", label: "Voucher", icon: "fa-solid fa-ticket" },
 ];
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function AccountPage() {
   const router = useRouter();
   const [user, setUser] = useState<IUser | null>(null);
@@ -60,7 +62,7 @@ export default function AccountPage() {
     const fetchUser = async () => {
       if (token) {
         try {
-          const response = await fetch('http://localhost:3000/user/profile', {
+          const response = await fetch(`${API_URL}/user/profile`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -72,7 +74,7 @@ export default function AccountPage() {
             if (data.avatar) {
               const newAvatar = data.avatar.startsWith('http') 
                 ? data.avatar 
-                : `http://localhost:3000/${data.avatar}`;
+                : `${API_URL}/${data.avatar}`;
               setAvatar(newAvatar);
             }
           } else {
@@ -108,7 +110,7 @@ export default function AccountPage() {
     if (!token) return;
 
     try {
-      const response = await fetch('http://localhost:3000/user/addresses', {
+      const response = await fetch(`${API_URL}/user/addresses`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -135,7 +137,7 @@ export default function AccountPage() {
 
     try {
       setIsLoadingWishlist(true);
-      const response = await fetch('http://localhost:3000/user/wishlist', {
+      const response = await fetch(`${API_URL}/user/wishlist`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -179,7 +181,7 @@ export default function AccountPage() {
       formData.append('avatar', selectedAvatarFile);
     try {
       setIsLoading(true);
-      const response = await fetch('http://localhost:3000/user/profile/update', {
+      const response = await fetch(`${API_URL}/user/profile/update`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -193,7 +195,7 @@ export default function AccountPage() {
         if (result.user.avatar) {
           const updatedAvatar = result.user.avatar.startsWith('http')
             ? result.user.avatar
-            : `http://localhost:3000/${result.user.avatar}?t=${new Date().getTime()}`;
+            : `${API_URL}/${result.user.avatar}?t=${new Date().getTime()}`;
           setAvatar(updatedAvatar);
         }
         setSelectedAvatarFile(null);
@@ -211,7 +213,7 @@ export default function AccountPage() {
     if (!token) return;
 
     try {
-      const response = await fetch('http://localhost:3000/user/addresses', {
+      const response = await fetch(`${API_URL}/user/addresses`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -238,7 +240,7 @@ export default function AccountPage() {
     if (!token) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/user/addresses/${addressId}`, {
+      const response = await fetch(`${API_URL}/user/addresses/${addressId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -269,7 +271,7 @@ export default function AccountPage() {
     if (!token || !editingAddressId) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/user/addresses/${editingAddressId}`, {
+      const response = await fetch(`${API_URL}/user/addresses/${editingAddressId}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -302,7 +304,7 @@ export default function AccountPage() {
     if (!token) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/user/wishlist/${productId}`, {
+      const response = await fetch(`${API_URL}/user/wishlist/${productId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

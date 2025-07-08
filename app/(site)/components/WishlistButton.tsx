@@ -11,6 +11,8 @@ export default function WishlistButton({ productId, initialIsWishlisted }: Wishl
     const [isWishlisted, setIsWishlisted] = useState(initialIsWishlisted);
     const [isLoading, setIsLoading] = useState(false);
 
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
     const handleWishlist = async () => {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -20,7 +22,7 @@ export default function WishlistButton({ productId, initialIsWishlisted }: Wishl
 
         setIsLoading(true);
         try {
-            const response = await fetch(`http://localhost:3000/user/wishlist/${productId}`, {
+            const response = await fetch(`${API_URL}/user/wishlist/${productId}`, {
                 method: isWishlisted ? "DELETE" : "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`

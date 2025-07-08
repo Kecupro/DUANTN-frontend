@@ -30,10 +30,12 @@ export default function Feedback() {
   const [products, setProducts] = useState<TopRatedProduct[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     const fetchTopRatedProducts = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/products/top-rated?limit=6');
+        const response = await fetch(`${API_URL}/api/products/top-rated?limit=6`);
         const data = await response.json();
         setProducts(data);
       } catch (error) {

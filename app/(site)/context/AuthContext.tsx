@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IUser } from "../cautrucdata";
+
 interface AuthContextType {
   user: IUser | null;
   setUser: (user: IUser | null) => void;
@@ -15,11 +16,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
   const router = useRouter();
   
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   // Hàm lấy user từ API (dùng khi đăng nhập Google hoặc refresh avatar)
   const refreshUser = async () => {
     const token = localStorage.getItem("token");
     if (token) {
-      const res = await fetch("http://localhost:3000/user/profile", {
+      const res = await fetch(`${API_URL}/user/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {

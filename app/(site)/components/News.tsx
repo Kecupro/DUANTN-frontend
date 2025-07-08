@@ -14,13 +14,15 @@ export default function News() {
   const [newsList, setNewsList] = useState<INews[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     fetchNews();
   }, []);
 
   const fetchNews = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/news');
+      const response = await axios.get(`${API_URL}/api/news`);
       setNewsList(response.data.news);
     } catch (error) {
       console.error('Error fetching news:', error);

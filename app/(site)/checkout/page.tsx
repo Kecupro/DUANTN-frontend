@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 // import { useRouter } from "next/navigation";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function CheckoutPage() {
 	const [token, setToken] = useState<string | null>(null);
@@ -53,7 +54,7 @@ export default function CheckoutPage() {
 		}
 	  
 		try {
-		  const res = await fetch("http://localhost:3000/api/check", {
+		  const res = await fetch(`${API_URL}/api/check`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
@@ -101,7 +102,7 @@ export default function CheckoutPage() {
 	useEffect(() => {
 		const fetchPaymentMethods = async () => {
 			try {
-				const response = await fetch("http://localhost:3000/api/payment-method");
+				const response = await fetch(`${API_URL}/api/payment-method`);
 				if (!response.ok) {
 					throw new Error("Failed to fetch payment methods");
 				}
@@ -126,7 +127,7 @@ export default function CheckoutPage() {
 		if (!token) return;
 	
 		try {
-		  const response = await fetch('http://localhost:3000/user/addresses', {
+		  const response = await fetch(`${API_URL}/user/addresses`, {
 			headers: {
 			  'Authorization': `Bearer ${token}`
 			}
@@ -283,7 +284,7 @@ export default function CheckoutPage() {
 
 		if (showNewAddressForm) {
 			// Thêm địa chỉ mới
-			fetch("http://localhost:3000/user/addresses", {
+			fetch(`${API_URL}/user/addresses`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -343,7 +344,7 @@ export default function CheckoutPage() {
 			  : { address_id: selectedAddressId || null }),
 		  };
 		  
-		fetch("http://localhost:3000/api/checkout", {
+		fetch(`${API_URL}/api/checkout`, {
 			method: "POST",
 			headers: {
 			  "Content-Type": "application/json",
