@@ -8,7 +8,6 @@ import {
   Calendar,
   Tag,
   Percent,
-  DollarSign,
 } from "lucide-react";
 import styles from "../../assets/css/detail.module.css";
 import { useAppContext } from "../../../context/AppContext";
