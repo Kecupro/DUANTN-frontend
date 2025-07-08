@@ -1,17 +1,3 @@
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 245, 245, 245;
-  --background-end-rgb: 255, 255, 255;
-  --text-color-light: #000000;
-  --header-bg-light: #ffffff;
-  --sidebar-bg-light: #ffffff;
-  --sidebar-text-light: #000000;
-  --card-bg-light: #fff;
-  --border-color-light: #eee;
-  --accent-color: #ff4d4f;
-  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --color-grey: #666;
-}
 
 html.dark-mode {
   --foreground-rgb: 255, 255, 255;
