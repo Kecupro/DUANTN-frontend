@@ -11,7 +11,7 @@ const EditBrand = () => {
   const [selectedFile, setSelectedFile] = useState({ name: 'dong-ho-G-shock.jpg' }); // Giả lập file đã có
   const [activeTab, setActiveTab] = useState('preview'); // Bắt đầu với preview tab vì đã có file
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files[0];
     setSelectedFile(file);
     if (file) {
