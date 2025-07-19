@@ -50,13 +50,13 @@ export default function ProductSale() {
                 sold: 12,
                 categories: [{ name: "Đồng hồ nam" }],
                 main_image: { 
-                    image: "rolex-submariner-sale.jpg", 
+                    image: "breguet-classique-quantieme-perpetuel-7327br-11-9vu-39mm.jpg.webp", 
                     alt: "Rolex Submariner Date 126610LN" 
                 },
                 images: [
-                    { _id: "img1", is_main: true, image: "rolex-submariner-sale.jpg", alt: "Rolex Submariner Date 126610LN" },
-                    { _id: "img2", is_main: false, image: "rolex-submariner-2.jpg", alt: "Rolex Submariner Date 126610LN - Góc nghiêng" },
-                    { _id: "img3", is_main: false, image: "rolex-submariner-3.jpg", alt: "Rolex Submariner Date 126610LN - Mặt sau" }
+                    { _id: "img1", is_main: true, image: "breguet-classique-quantieme-perpetuel-7327br-11-9vu-39mm.jpg.webp", alt: "Rolex Submariner Date 126610LN" },
+                    { _id: "img2", is_main: false, image: "breguet-classique-7145br-15-9wu-snake-limited-40mm1.png.webp", alt: "Rolex Submariner Date 126610LN - Góc nghiêng" },
+                    { _id: "img3", is_main: false, image: "breguet-classique-7145br-15-9wu-snake-limited-40mm2.png.webp", alt: "Rolex Submariner Date 126610LN - Mặt sau" }
                 ],
                 created_at: "2024-01-15T10:30:00Z",
                 updated_at: "2024-01-20T14:45:00Z"
@@ -84,12 +84,12 @@ export default function ProductSale() {
                 sold: 8,
                 categories: [{ name: "Đồng hồ nam" }],
                 main_image: { 
-                    image: "omega-seamaster-sale.jpg", 
+                    image: "bulova-accu-swiss-tellaro-automatic-watch-43mm4.jpg.webp", 
                     alt: "Omega Seamaster Planet Ocean" 
                 },
                 images: [
-                    { _id: "img4", is_main: true, image: "omega-seamaster-sale.jpg", alt: "Omega Seamaster Planet Ocean" },
-                    { _id: "img5", is_main: false, image: "omega-seamaster-2.jpg", alt: "Omega Seamaster Planet Ocean - Góc nghiêng" }
+                    { _id: "img4", is_main: true, image: "bulova-accu-swiss-tellaro-automatic-watch-43mm4.jpg.webp", alt: "Omega Seamaster Planet Ocean" },
+                    { _id: "img5", is_main: false, image: "bulova-accu-swiss-tellaro-automatic-watch-43mm3.jpg_980_980.webp", alt: "Omega Seamaster Planet Ocean - Góc nghiêng" }
                 ],
                 created_at: "2024-01-10T09:15:00Z",
                 updated_at: "2024-01-18T16:20:00Z"
@@ -117,12 +117,12 @@ export default function ProductSale() {
                 sold: 15,
                 categories: [{ name: "Đồng hồ nữ" }],
                 main_image: { 
-                    image: "cartier-tank-sale.jpg", 
+                    image: "baume--mercier-hampton-10709-blue-watch-35-x-22mm1.png.webp", 
                     alt: "Cartier Tank Solo Automatic" 
                 },
                 images: [
-                    { _id: "img6", is_main: true, image: "cartier-tank-sale.jpg", alt: "Cartier Tank Solo Automatic" },
-                    { _id: "img7", is_main: false, image: "cartier-tank-2.jpg", alt: "Cartier Tank Solo Automatic - Góc nghiêng" }
+                    { _id: "img6", is_main: true, image: "baume--mercier-hampton-10709-blue-watch-35-x-22mm1.png.webp", alt: "Cartier Tank Solo Automatic" },
+                    { _id: "img7", is_main: false, image: "baume--mercier-hampton-10709-blue-watch-35-x-22mm2.png.webp", alt: "Cartier Tank Solo Automatic - Góc nghiêng" }
                 ],
                 created_at: "2024-01-12T11:45:00Z",
                 updated_at: "2024-01-19T13:30:00Z"
@@ -150,12 +150,12 @@ export default function ProductSale() {
                 sold: 6,
                 categories: [{ name: "Đồng hồ nam" }],
                 main_image: { 
-                    image: "longines-heritage-sale.jpg", 
+                    image: "bulova-sutton-automatic-34-5mm1.png.webp", 
                     alt: "Longines Heritage Classic" 
                 },
                 images: [
-                    { _id: "img8", is_main: true, image: "longines-heritage-sale.jpg", alt: "Longines Heritage Classic" },
-                    { _id: "img9", is_main: false, image: "longines-heritage-2.jpg", alt: "Longines Heritage Classic - Góc nghiêng" }
+                    { _id: "img8", is_main: true, image: "bulova-sutton-automatic-34-5mm1.png.webp", alt: "Longines Heritage Classic" },
+                    { _id: "img9", is_main: false, image: "bulova-sutton-automatic-34-5mm2.png.webp", alt: "Longines Heritage Classic - Góc nghiêng" }
                 ],
                 created_at: "2024-01-08T08:30:00Z",
                 updated_at: "2024-01-16T15:45:00Z"

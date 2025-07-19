@@ -27,10 +27,191 @@ export default function SPLienQuan({id} : {id:string}) {
 
     // Fetch danh sách sản phẩm liên quan
     useEffect(() => {
-        fetch(`${API_URL}/api/sp_lien_quan/${id}`)
-            .then((res) => res.json())
-            .then((data) => setProducts(data))
-            .catch((err) => console.error("Lỗi fetch sp:", err));
+        // Dữ liệu giả cho sản phẩm liên quan
+        const mockRelatedProducts: IProduct[] = [
+            {
+                _id: "related_1",
+                brand: { name: "Patek Philippe" },
+                name: "Patek Philippe Nautilus 5711/1A - Đồng hồ thể thao cao cấp",
+                description: "Đồng hồ Patek Philippe Nautilus với thiết kế độc đáo, máy tự động 26-330 S C, vỏ thép không gỉ 40.5mm. Sản phẩm limited edition, rất hiếm trên thị trường.",
+                price: 120000000,
+                sale_price: 0,
+                status: 1,
+                quantity: 2,
+                views: 2100,
+                sex: "Nam",
+                case_diameter: 40.5,
+                style: "Thể thao",
+                features: "Lịch ngày, Chống nước",
+                water_resistance: "120m",
+                thickness: 8.3,
+                color: "Xanh dương",
+                machine_type: "Tự động",
+                strap_material: "Dây đeo thép",
+                case_material: "Thép không gỉ",
+                sold: 3,
+                categories: [{ name: "Đồng hồ nam" }],
+                main_image: { 
+                    image: "breguet-tradition-dame-7038bb-1t-9v6-d00d-watch-37mm1.jpg.webp", 
+                    alt: "Patek Philippe Nautilus 5711/1A" 
+                },
+                images: [],
+                created_at: "2024-01-05T12:00:00Z",
+                updated_at: "2024-01-15T16:30:00Z"
+            },
+            {
+                _id: "related_2",
+                brand: { name: "Audemars Piguet" },
+                name: "Audemars Piguet Royal Oak 15500ST - Đồng hồ thể thao",
+                description: "Đồng hồ Audemars Piguet Royal Oak với thiết kế octagonal bezel độc đáo, máy tự động 4302, vỏ thép không gỉ 41mm. Biểu tượng của luxury sports watch.",
+                price: 95000000,
+                sale_price: 76000000,
+                status: 1,
+                quantity: 4,
+                views: 1800,
+                sex: "Nam",
+                case_diameter: 41,
+                style: "Thể thao",
+                features: "Lịch ngày, Chống nước",
+                water_resistance: "50m",
+                thickness: 10.4,
+                color: "Xanh dương",
+                machine_type: "Tự động",
+                strap_material: "Dây đeo thép",
+                case_material: "Thép không gỉ",
+                sold: 7,
+                categories: [{ name: "Đồng hồ nam" }],
+                main_image: { 
+                    image: "bulova-accutron-2es8a001-accutron-dna-watch-45mm1.png.webp", 
+                    alt: "Audemars Piguet Royal Oak 15500ST" 
+                },
+                images: [],
+                created_at: "2024-01-08T09:30:00Z",
+                updated_at: "2024-01-18T14:20:00Z"
+            },
+            {
+                _id: "related_3",
+                brand: { name: "Vacheron Constantin" },
+                name: "Vacheron Constantin Overseas 4500V - Đồng hồ thể thao",
+                description: "Đồng hồ Vacheron Constantin Overseas với thiết kế thanh lịch, máy tự động 5100, vỏ thép không gỉ 41mm. Kết hợp hoàn hảo giữa thể thao và sang trọng.",
+                price: 88000000,
+                sale_price: 0,
+                status: 1,
+                quantity: 3,
+                views: 950,
+                sex: "Nam",
+                case_diameter: 41,
+                style: "Thể thao",
+                features: "Lịch ngày, Chống nước",
+                water_resistance: "150m",
+                thickness: 11,
+                color: "Xanh dương",
+                machine_type: "Tự động",
+                strap_material: "Dây đeo thép",
+                case_material: "Thép không gỉ",
+                sold: 5,
+                categories: [{ name: "Đồng hồ nam" }],
+                main_image: { 
+                    image: "bulova-surveyor-watch-41mm1.png.webp", 
+                    alt: "Vacheron Constantin Overseas 4500V" 
+                },
+                images: [],
+                created_at: "2024-01-12T11:15:00Z",
+                updated_at: "2024-01-20T13:45:00Z"
+            },
+            {
+                _id: "related_4",
+                brand: { name: "IWC" },
+                name: "IWC Portugieser Chronograph - Đồng hồ chronograph",
+                description: "Đồng hồ IWC Portugieser Chronograph với thiết kế cổ điển, máy tự động 69355, vỏ thép không gỉ 41mm. Phù hợp cho cả công sở và các dịp trang trọng.",
+                price: 65000000,
+                sale_price: 52000000,
+                status: 1,
+                quantity: 6,
+                views: 1200,
+                sex: "Nam",
+                case_diameter: 41,
+                style: "Cổ điển",
+                features: "Chronograph, Lịch ngày",
+                water_resistance: "30m",
+                thickness: 13,
+                color: "Trắng",
+                machine_type: "Tự động",
+                strap_material: "Dây đeo da",
+                case_material: "Thép không gỉ",
+                sold: 9,
+                categories: [{ name: "Đồng hồ nam" }],
+                main_image: { 
+                    image: "bulova-accutron-masella-chronograph-black-watch-40mm1.jpg.webp", 
+                    alt: "IWC Portugieser Chronograph" 
+                },
+                images: [],
+                created_at: "2024-01-10T10:45:00Z",
+                updated_at: "2024-01-17T15:30:00Z"
+            },
+            {
+                _id: "related_5",
+                brand: { name: "Jaeger-LeCoultre" },
+                name: "Jaeger-LeCoultre Reverso Classic - Đồng hồ cổ điển",
+                description: "Đồng hồ Jaeger-LeCoultre Reverso với thiết kế mặt số có thể lật, máy tự động 822A/2, vỏ thép không gỉ 45.6mm x 27.4mm. Biểu tượng của Art Deco.",
+                price: 75000000,
+                sale_price: 0,
+                status: 1,
+                quantity: 2,
+                views: 800,
+                sex: "Nam",
+                case_diameter: 45.6,
+                style: "Cổ điển",
+                features: "Mặt số lật, Lịch ngày",
+                water_resistance: "30m",
+                thickness: 9.5,
+                color: "Bạc",
+                machine_type: "Tự động",
+                strap_material: "Dây đeo da",
+                case_material: "Thép không gỉ",
+                sold: 4,
+                categories: [{ name: "Đồng hồ nam" }],
+                main_image: { 
+                    image: "bulova-accutron-masella-diamond-markers-watch-31mm1.jpg.webp", 
+                    alt: "Jaeger-LeCoultre Reverso Classic" 
+                },
+                images: [],
+                created_at: "2024-01-06T08:20:00Z",
+                updated_at: "2024-01-14T12:10:00Z"
+            },
+            {
+                _id: "related_6",
+                brand: { name: "Breguet" },
+                name: "Breguet Classique 7147 - Đồng hồ cổ điển",
+                description: "Đồng hồ Breguet Classique với thiết kế tối giản, máy tự động 502.3 SD, vỏ vàng 18k 40mm. Thể hiện sự tinh tế và đẳng cấp của thương hiệu Breguet.",
+                price: 110000000,
+                sale_price: 88000000,
+                status: 1,
+                quantity: 1,
+                views: 1500,
+                sex: "Nam",
+                case_diameter: 40,
+                style: "Cổ điển",
+                features: "Lịch ngày, Mặt số guilloché",
+                water_resistance: "30m",
+                thickness: 6.1,
+                color: "Vàng",
+                machine_type: "Tự động",
+                strap_material: "Dây đeo da",
+                case_material: "Vàng 18k",
+                sold: 2,
+                categories: [{ name: "Đồng hồ nam" }],
+                main_image: { 
+                    image: "breguet-reine-de-naples-9835-limited-edition-36-5x28-45mm.png_980_980.webp", 
+                    alt: "Breguet Classique 7147" 
+                },
+                images: [],
+                created_at: "2024-01-03T14:30:00Z",
+                updated_at: "2024-01-12T09:45:00Z"
+            }
+        ];
+
+        setProducts(mockRelatedProducts);
     }, [id]);
     
     // Fetch wishlist status for all products
