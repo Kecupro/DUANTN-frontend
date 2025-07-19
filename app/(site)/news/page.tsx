@@ -1,7 +1,6 @@
 'use client';
 import Link from "next/link";
 import { useEffect, useState, useCallback } from "react";
-import axios from "axios";
 import { INews, ICateNews } from "../cautrucdata";
 
 interface NewsResponse {
@@ -40,10 +39,49 @@ export default function News() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 
   useEffect(() => {
-    fetchCategories();
+    // Dữ liệu giả cho categories
+    const mockCategories: ICateNews[] = [
+      {
+        _id: "cat_1",
+        name: "Tin tức đồng hồ",
+        status: 1,
+        created_at: new Date("2024-01-01"),
+        updated_at: new Date("2024-01-01")
+      },
+      {
+        _id: "cat_2",
+        name: "Đánh giá sản phẩm",
+        status: 1,
+        created_at: new Date("2024-01-01"),
+        updated_at: new Date("2024-01-01")
+      },
+      {
+        _id: "cat_3",
+        name: "Thương hiệu",
+        status: 1,
+        created_at: new Date("2024-01-01"),
+        updated_at: new Date("2024-01-01")
+      },
+      {
+        _id: "cat_4",
+        name: "Công nghệ",
+        status: 1,
+        created_at: new Date("2024-01-01"),
+        updated_at: new Date("2024-01-01")
+      },
+      {
+        _id: "cat_5",
+        name: "Sự kiện",
+        status: 1,
+        created_at: new Date("2024-01-01"),
+        updated_at: new Date("2024-01-01")
+      }
+    ];
+    setCategories(mockCategories);
+    fetchNews();
   }, []);
 
   // Debounce fetchNews để tránh gọi API quá nhiều
@@ -56,34 +94,184 @@ export default function News() {
   }, [currentPage, selectedCategory]);
 
   useEffect(() => {
-    debouncedFetchNews();
-  }, [currentPage, selectedCategory]);
-
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/api/category-news`);
-      setCategories(response.data);
-    } catch (err) {
-      console.error('Error fetching categories:', err);
+    if (categories.length > 0) {
+      debouncedFetchNews();
     }
-  };
+  }, [currentPage, selectedCategory]);
 
   const fetchNews = async () => {
     try {
       setIsTransitioning(true);
       
-      let url = `${API_URL}/api/news?page=${currentPage}&limit=6`;
-      
+      // Dữ liệu giả cho news
+      const mockNews: INews[] = [
+        {
+          _id: "news_1",
+          categorynews_id: "cat_1",
+          title: "Rolex Submariner - Huyền thoại đồng hồ lặn qua 70 năm",
+          content: "Kể từ khi ra mắt vào năm 1953, Rolex Submariner đã trở thành biểu tượng của đồng hồ lặn cao cấp. Với khả năng chống nước 300m và thiết kế bất tử, Submariner không chỉ là công cụ mà còn là tác phẩm nghệ thuật.",
+          image: "dive_watch_1.jpg",
+          news_status: 1,
+          views: 1250,
+          created_at: "2024-01-15T10:30:00Z",
+          updated_at: "2024-01-20T14:45:00Z",
+          category: { name: "Tin tức đồng hồ" }
+        },
+        {
+          _id: "news_2",
+          categorynews_id: "cat_2",
+          title: "Đánh giá chi tiết Omega Seamaster Planet Ocean 600M",
+          content: "Omega Seamaster Planet Ocean 600M là sự kết hợp hoàn hảo giữa công nghệ Co-Axial Master Chronometer và thiết kế thể thao. Chúng tôi sẽ phân tích chi tiết từng khía cạnh của chiếc đồng hồ này.",
+          image: "dive_watch_2.jpg",
+          news_status: 1,
+          views: 890,
+          created_at: "2024-01-12T09:15:00Z",
+          updated_at: "2024-01-18T16:20:00Z",
+          category: { name: "Đánh giá sản phẩm" }
+        },
+        {
+          _id: "news_3",
+          categorynews_id: "cat_3",
+          title: "Patek Philippe - Lịch sử 180 năm của thương hiệu đồng hồ cao cấp",
+          content: "Từ năm 1839, Patek Philippe đã tạo ra những chiếc đồng hồ phức tạp nhất thế giới. Hãy cùng khám phá lịch sử và những đóng góp của thương hiệu này cho ngành đồng hồ.",
+          image: "luxury_watch_1.jpg",
+          news_status: 1,
+          views: 2100,
+          created_at: "2024-01-10T11:45:00Z",
+          updated_at: "2024-01-19T13:30:00Z",
+          category: { name: "Thương hiệu" }
+        },
+        {
+          _id: "news_4",
+          categorynews_id: "cat_4",
+          title: "Công nghệ Smartwatch 2024 - Xu hướng mới nhất",
+          content: "Năm 2024 chứng kiến sự phát triển vượt bậc của công nghệ smartwatch. Từ Apple Watch Series 9 đến Samsung Galaxy Watch 6, hãy cùng điểm qua những tính năng mới nhất.",
+          image: "smartwatch_1.jpg",
+          news_status: 1,
+          views: 680,
+          created_at: "2024-01-08T08:30:00Z",
+          updated_at: "2024-01-16T15:45:00Z",
+          category: { name: "Công nghệ" }
+        },
+        {
+          _id: "news_5",
+          categorynews_id: "cat_5",
+          title: "Baselworld 2024 - Triển lãm đồng hồ lớn nhất thế giới",
+          content: "Baselworld 2024 quy tụ hơn 500 thương hiệu đồng hồ từ khắp nơi trên thế giới. Sự kiện này không chỉ là nơi trưng bày mà còn là cơ hội để các thương hiệu giới thiệu những sản phẩm mới.",
+          image: "luxury_watch_2.jpg",
+          news_status: 1,
+          views: 950,
+          created_at: "2024-01-05T12:00:00Z",
+          updated_at: "2024-01-15T16:30:00Z",
+          category: { name: "Sự kiện" }
+        },
+        {
+          _id: "news_6",
+          categorynews_id: "cat_1",
+          title: "Cartier Tank - Biểu tượng của sự thanh lịch",
+          content: "Cartier Tank với thiết kế hình chữ nhật độc đáo đã trở thành biểu tượng của sự thanh lịch trong hơn 100 năm qua. Hãy cùng tìm hiểu lịch sử và sự phát triển của dòng đồng hồ này.",
+          image: "dress_watch_1.jpg",
+          news_status: 1,
+          views: 720,
+          created_at: "2024-01-03T14:30:00Z",
+          updated_at: "2024-01-12T09:45:00Z",
+          category: { name: "Tin tức đồng hồ" }
+        },
+        {
+          _id: "news_7",
+          categorynews_id: "cat_2",
+          title: "Đánh giá Audemars Piguet Royal Oak - Đồng hồ thể thao cao cấp",
+          content: "Audemars Piguet Royal Oak với thiết kế octagonal bezel độc đáo đã thay đổi cách nhìn về đồng hồ thể thao cao cấp. Chúng tôi sẽ phân tích chi tiết từng khía cạnh của chiếc đồng hồ này.",
+          image: "sport_watch_1.jpg",
+          news_status: 1,
+          views: 1100,
+          created_at: "2024-01-01T10:15:00Z",
+          updated_at: "2024-01-10T14:20:00Z",
+          category: { name: "Đánh giá sản phẩm" }
+        },
+        {
+          _id: "news_8",
+          categorynews_id: "cat_3",
+          title: "Breguet - Nghệ nhân đồng hồ của các vị vua",
+          content: "Abraham-Louis Breguet được mệnh danh là 'nghệ nhân đồng hồ của các vị vua và vua của các nghệ nhân đồng hồ'. Hãy cùng khám phá lịch sử và những đóng góp của ông cho ngành đồng hồ.",
+          image: "luxury_watch_3.jpg",
+          news_status: 1,
+          views: 850,
+          created_at: "2024-01-18T16:45:00Z",
+          updated_at: "2024-01-22T11:30:00Z",
+          category: { name: "Thương hiệu" }
+        },
+        {
+          _id: "news_9",
+          categorynews_id: "cat_4",
+          title: "Công nghệ Eco-Drive của Citizen - Năng lượng mặt trời",
+          content: "Công nghệ Eco-Drive của Citizen đã cách mạng hóa ngành đồng hồ với khả năng sử dụng năng lượng mặt trời. Hãy cùng tìm hiểu về công nghệ độc đáo này.",
+          image: "smartwatch_2.jpg",
+          news_status: 1,
+          views: 420,
+          created_at: "2024-01-16T13:20:00Z",
+          updated_at: "2024-01-21T09:15:00Z",
+          category: { name: "Công nghệ" }
+        },
+        {
+          _id: "news_10",
+          categorynews_id: "cat_5",
+          title: "SIHH 2024 - Triển lãm đồng hồ cao cấp Geneva",
+          content: "SIHH 2024 tại Geneva là nơi quy tụ những thương hiệu đồng hồ cao cấp nhất thế giới. Sự kiện này giới thiệu những bộ sưu tập mới nhất và xu hướng thời trang đồng hồ.",
+          image: "luxury_watch_4.jpg",
+          news_status: 1,
+          views: 780,
+          created_at: "2024-01-14T11:30:00Z",
+          updated_at: "2024-01-20T15:45:00Z",
+          category: { name: "Sự kiện" }
+        },
+        {
+          _id: "news_11",
+          categorynews_id: "cat_1",
+          title: "Longines Heritage - Kết nối quá khứ và hiện tại",
+          content: "Longines Heritage là bộ sưu tập tôn vinh lịch sử của thương hiệu với những thiết kế retro hiện đại. Hãy cùng khám phá những mẫu đồng hồ đặc biệt này.",
+          image: "dress_watch_2.jpg",
+          news_status: 1,
+          views: 650,
+          created_at: "2024-01-11T09:45:00Z",
+          updated_at: "2024-01-17T12:20:00Z",
+          category: { name: "Tin tức đồng hồ" }
+        },
+        {
+          _id: "news_12",
+          categorynews_id: "cat_2",
+          title: "Đánh giá IWC Portugieser - Đồng hồ chronograph cổ điển",
+          content: "IWC Portugieser với thiết kế cổ điển và máy chronograph chính xác đã trở thành biểu tượng của đồng hồ Thụy Sĩ. Chúng tôi sẽ phân tích chi tiết từng khía cạnh.",
+          image: "sport_watch_2.jpg",
+          news_status: 1,
+          views: 920,
+          created_at: "2024-01-09T15:10:00Z",
+          updated_at: "2024-01-16T10:30:00Z",
+          category: { name: "Đánh giá sản phẩm" }
+        }
+      ];
+
+      // Filter news based on selected category
+      let filteredNews = mockNews;
       if (selectedCategory !== 'all') {
-        url = `${API_URL}/api/news/category/${selectedCategory}?page=${currentPage}&limit=6`;
+        filteredNews = mockNews.filter(news => news.categorynews_id === selectedCategory);
       }
-      
-      const response = await axios.get(url);
-      
+
+      // Pagination
+      const itemsPerPage = 6;
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const paginatedNews = filteredNews.slice(startIndex, endIndex);
+
       // Thêm delay nhỏ để tạo hiệu ứng mượt
       await new Promise(resolve => setTimeout(resolve, 150));
       
-      setNewsData(response.data);
+      setNewsData({
+        news: paginatedNews,
+        currentPage: currentPage,
+        totalPages: Math.ceil(filteredNews.length / itemsPerPage),
+        totalNews: filteredNews.length
+      });
       setError(null);
     } catch (err) {
       setError('Không thể tải danh sách tin tức');

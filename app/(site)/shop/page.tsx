@@ -48,20 +48,248 @@ export default function ShopPage() {
 
   // Fetch categories
   useEffect(() => {
-    fetch(`${API_URL}/api/category`)
-      .then((res) => res.json())
-      .then((data: { name: string }[]) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setCategories(["Tất cả", ...data.map((c) => c.name)]);
-        }
-      });
+    // Dữ liệu giả cho categories
+    const mockCategories = [
+      "Tất cả",
+      "Đồng hồ nam",
+      "Đồng hồ nữ", 
+      "Đồng hồ thể thao",
+      "Đồng hồ cổ điển",
+      "Đồng hồ chronograph",
+      "Đồng hồ lặn",
+      "Đồng hồ bỏ túi",
+      "Đồng hồ smartwatch",
+      "Đồng hồ luxury"
+    ];
+    setCategories(mockCategories);
   }, []);
 
   // Fetch brands
   useEffect(() => {
-    fetch(`${API_URL}/api/brand`)
-      .then((res) => res.json())
-      .then((data: IBrand[]) => setBrands(data));
+    // Dữ liệu giả cho brands
+    const mockBrands: IBrand[] = [
+      {
+        _id: 1,
+        name: "Rolex",
+        image: "luxury-shopping-1",
+        alt: "Rolex",
+        description: "Thương hiệu đồng hồ cao cấp hàng đầu thế giới",
+        brand_status: 1,
+        productCount: 25,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 2, 
+        name: "Omega",
+        image: "luxury-shopping-watch1-1",
+        alt: "Omega",
+        description: "Đồng hồ chính thức của NASA và James Bond",
+        brand_status: 1,
+        productCount: 18,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 3,
+        name: "Cartier",
+        image: "cartier-luxshopping4",
+        alt: "Cartier", 
+        description: "Thương hiệu đồng hồ và trang sức cao cấp",
+        brand_status: 1,
+        productCount: 15,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 4,
+        name: "Patek Philippe",
+        image: "patek-philippe-logo1-1",
+        alt: "Patek Philippe",
+        description: "Đồng hồ cao cấp nhất thế giới",
+        brand_status: 1,
+        productCount: 8,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 5,
+        name: "Audemars Piguet",
+        image: "luxury-shopping3-1",
+        alt: "Audemars Piguet",
+        description: "Thương hiệu đồng hồ thể thao cao cấp",
+        brand_status: 1,
+        productCount: 12,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 6,
+        name: "Breguet",
+        image: "breguet-luxshopping-1",
+        alt: "Breguet",
+        description: "Đồng hồ cổ điển với lịch sử hơn 200 năm",
+        brand_status: 1,
+        productCount: 10,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 7,
+        name: "Longines",
+        image: "logo-longines-full",
+        alt: "Longines",
+        description: "Đồng hồ cổ điển với giá cả hợp lý",
+        brand_status: 1,
+        productCount: 22,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 8,
+        name: "IWC",
+        image: "luxury-shopping8-1",
+        alt: "IWC",
+        description: "Đồng hồ kỹ thuật cao của Thụy Sĩ",
+        brand_status: 1,
+        productCount: 14,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 9,
+        name: "Jaeger-LeCoultre",
+        image: "jaeger-lecoultre-luxshopping1",
+        alt: "Jaeger-LeCoultre",
+        description: "Nhà sản xuất đồng hồ phức tạp",
+        brand_status: 1,
+        productCount: 9,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 10,
+        name: "Vacheron Constantin",
+        image: "vacheron-constantin-luxshopping2-0",
+        alt: "Vacheron Constantin",
+        description: "Đồng hồ cao cấp với lịch sử lâu đời",
+        brand_status: 1,
+        productCount: 6,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 11,
+        name: "Hublot",
+        image: "hublot-luxshopping2-1",
+        alt: "Hublot",
+        description: "Đồng hồ thể thao hiện đại",
+        brand_status: 1,
+        productCount: 11,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 12,
+        name: "Tag Heuer",
+        image: "tag-heuer-9",
+        alt: "Tag Heuer",
+        description: "Đồng hồ thể thao và chronograph",
+        brand_status: 1,
+        productCount: 16,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 13,
+        name: "Tissot",
+        image: "luxshopping41-1",
+        alt: "Tissot",
+        description: "Đồng hồ Thụy Sĩ với giá cả phải chăng",
+        brand_status: 1,
+        productCount: 20,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 14,
+        name: "Seiko",
+        image: "luxshopping46-1",
+        alt: "Seiko",
+        description: "Đồng hồ Nhật Bản chất lượng cao",
+        brand_status: 1,
+        productCount: 28,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 15,
+        name: "Citizen",
+        image: "luxshopping45-1",
+        alt: "Citizen",
+        description: "Đồng hồ công nghệ Eco-Drive",
+        brand_status: 1,
+        productCount: 24,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 16,
+        name: "Chanel",
+        image: "chanel-luxshoppping1-1",
+        alt: "Chanel",
+        description: "Thương hiệu thời trang cao cấp",
+        brand_status: 1,
+        productCount: 8,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 17,
+        name: "Dior",
+        image: "dior-luxshopping1-1",
+        alt: "Dior",
+        description: "Thương hiệu thời trang xa xỉ",
+        brand_status: 1,
+        productCount: 6,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 18,
+        name: "Chopard",
+        image: "chopard-luxshopping-20231",
+        alt: "Chopard",
+        description: "Đồng hồ và trang sức cao cấp",
+        brand_status: 1,
+        productCount: 9,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 19,
+        name: "Piaget",
+        image: "piaget-luxury-shopping1-1",
+        alt: "Piaget",
+        description: "Đồng hồ mỏng và trang sức",
+        brand_status: 1,
+        productCount: 7,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      },
+      {
+        _id: 20,
+        name: "Panerai",
+        image: "panerai-luxshopping2-1",
+        alt: "Panerai",
+        description: "Đồng hồ thể thao Ý",
+        brand_status: 1,
+        productCount: 11,
+        created_at: "2024-01-01T00:00:00Z",
+        updated_at: "2024-01-01T00:00:00Z"
+      }
+    ];
+    setBrands(mockBrands);
   }, []);
 
   // Reset page về 1 khi filter thay đổi
@@ -72,36 +300,945 @@ export default function ShopPage() {
   // Fetch products (có filter theo brand)
   useEffect(() => {
     setLoading(true);
-    const params = new URLSearchParams();
-    params.append('limit', '12');
-    params.append('page', page.toString());
     
+    // Dữ liệu giả cho products
+    const mockProducts: IProduct[] = [
+      {
+        _id: "shop_1",
+        brand: { name: "Rolex" },
+        name: "Rolex Submariner Date 126610LN - Đồng hồ lặn cao cấp",
+        description: "Đồng hồ Rolex Submariner Date với thiết kế cổ điển, khả năng chống nước 300m, máy tự động 3235, vỏ thép không gỉ 41mm.",
+        price: 85000000,
+        sale_price: 72000000,
+        status: 1,
+        quantity: 5,
+        views: 1250,
+        sex: "Nam",
+        case_diameter: 41,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày, Chống nước",
+        water_resistance: "300m",
+        thickness: 12.5,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo thép",
+        case_material: "Thép không gỉ",
+        sold: 12,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "breguet-classique-quantieme-perpetuel-7327br-11-9vu-39mm.jpg.webp", 
+          alt: "Rolex Submariner Date 126610LN" 
+        },
+        images: [],
+        created_at: "2024-01-15T10:30:00Z",
+        updated_at: "2024-01-20T14:45:00Z"
+      },
+      {
+        _id: "shop_2",
+        brand: { name: "Omega" },
+        name: "Omega Seamaster Planet Ocean 600M Co-Axial Master Chronometer",
+        description: "Đồng hồ Omega Seamaster Planet Ocean với khả năng chống nước 600m, máy Co-Axial Master Chronometer 8900.",
+        price: 65000000,
+        sale_price: 52000000,
+        status: 1,
+        quantity: 3,
+        views: 890,
+        sex: "Nam",
+        case_diameter: 43.5,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày, Chống nước cao",
+        water_resistance: "600m",
+        thickness: 14.5,
+        color: "Xanh dương",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo cao su",
+        case_material: "Thép không gỉ",
+        sold: 8,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "bulova-accu-swiss-tellaro-automatic-watch-43mm4.jpg.webp", 
+          alt: "Omega Seamaster Planet Ocean" 
+        },
+        images: [],
+        created_at: "2024-01-10T09:15:00Z",
+        updated_at: "2024-01-18T16:20:00Z"
+      },
+      {
+        _id: "shop_3",
+        brand: { name: "Cartier" },
+        name: "Cartier Tank Solo Automatic - Đồng hồ thanh lịch",
+        description: "Đồng hồ Cartier Tank Solo với thiết kế hình chữ nhật độc đáo, máy tự động 1847 MC.",
+        price: 45000000,
+        sale_price: 36000000,
+        status: 1,
+        quantity: 7,
+        views: 650,
+        sex: "Nữ",
+        case_diameter: 27.4,
+        style: "Cổ điển",
+        features: "Lịch ngày, Dây đeo da",
+        water_resistance: "30m",
+        thickness: 6.6,
+        color: "Bạc",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 15,
+        categories: [{ name: "Đồng hồ nữ" }],
+        main_image: { 
+          image: "baume--mercier-hampton-10709-blue-watch-35-x-22mm1.png.webp", 
+          alt: "Cartier Tank Solo Automatic" 
+        },
+        images: [],
+        created_at: "2024-01-12T11:45:00Z",
+        updated_at: "2024-01-19T13:30:00Z"
+      },
+      {
+        _id: "shop_4",
+        brand: { name: "Longines" },
+        name: "Longines Heritage Classic - Đồng hồ cổ điển",
+        description: "Đồng hồ Longines Heritage Classic với thiết kế retro, máy tự động L888, vỏ thép 40mm.",
+        price: 28000000,
+        sale_price: 22400000,
+        status: 1,
+        quantity: 10,
+        views: 420,
+        sex: "Nam",
+        case_diameter: 40,
+        style: "Cổ điển",
+        features: "Lịch ngày, Dây đeo da",
+        water_resistance: "30m",
+        thickness: 11.5,
+        color: "Trắng",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 6,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "bulova-sutton-automatic-34-5mm1.png.webp", 
+          alt: "Longines Heritage Classic" 
+        },
+        images: [],
+        created_at: "2024-01-08T08:30:00Z",
+        updated_at: "2024-01-16T15:45:00Z"
+      },
+      {
+        _id: "shop_5",
+        brand: { name: "Patek Philippe" },
+        name: "Patek Philippe Nautilus 5711/1A - Đồng hồ thể thao cao cấp",
+        description: "Đồng hồ Patek Philippe Nautilus với thiết kế độc đáo, máy tự động 26-330 S C, vỏ thép không gỉ 40.5mm.",
+        price: 120000000,
+        sale_price: 0,
+        status: 1,
+        quantity: 2,
+        views: 2100,
+        sex: "Nam",
+        case_diameter: 40.5,
+        style: "Thể thao",
+        features: "Lịch ngày, Chống nước",
+        water_resistance: "120m",
+        thickness: 8.3,
+        color: "Xanh dương",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo thép",
+        case_material: "Thép không gỉ",
+        sold: 3,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "breguet-tradition-dame-7038bb-1t-9v6-d00d-watch-37mm1.jpg.webp", 
+          alt: "Patek Philippe Nautilus 5711/1A" 
+        },
+        images: [],
+        created_at: "2024-01-05T12:00:00Z",
+        updated_at: "2024-01-15T16:30:00Z"
+      },
+      {
+        _id: "shop_6",
+        brand: { name: "Audemars Piguet" },
+        name: "Audemars Piguet Royal Oak 15500ST - Đồng hồ thể thao",
+        description: "Đồng hồ Audemars Piguet Royal Oak với thiết kế octagonal bezel độc đáo, máy tự động 4302.",
+        price: 95000000,
+        sale_price: 76000000,
+        status: 1,
+        quantity: 4,
+        views: 1800,
+        sex: "Nam",
+        case_diameter: 41,
+        style: "Thể thao",
+        features: "Lịch ngày, Chống nước",
+        water_resistance: "50m",
+        thickness: 10.4,
+        color: "Xanh dương",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo thép",
+        case_material: "Thép không gỉ",
+        sold: 7,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "bulova-accutron-2es8a001-accutron-dna-watch-45mm1.png.webp", 
+          alt: "Audemars Piguet Royal Oak 15500ST" 
+        },
+        images: [],
+        created_at: "2024-01-08T09:30:00Z",
+        updated_at: "2024-01-18T14:20:00Z"
+      },
+      {
+        _id: "shop_7",
+        brand: { name: "IWC" },
+        name: "IWC Portugieser Chronograph - Đồng hồ chronograph",
+        description: "Đồng hồ IWC Portugieser Chronograph với thiết kế cổ điển, máy tự động 69355, vỏ thép không gỉ 41mm.",
+        price: 65000000,
+        sale_price: 52000000,
+        status: 1,
+        quantity: 6,
+        views: 1200,
+        sex: "Nam",
+        case_diameter: 41,
+        style: "Cổ điển",
+        features: "Chronograph, Lịch ngày",
+        water_resistance: "30m",
+        thickness: 13,
+        color: "Trắng",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 9,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "bulova-accutron-masella-chronograph-black-watch-40mm1.jpg.webp", 
+          alt: "IWC Portugieser Chronograph" 
+        },
+        images: [],
+        created_at: "2024-01-10T10:45:00Z",
+        updated_at: "2024-01-17T15:30:00Z"
+      },
+      {
+        _id: "shop_8",
+        brand: { name: "Breguet" },
+        name: "Breguet Classique 7147 - Đồng hồ cổ điển",
+        description: "Đồng hồ Breguet Classique với thiết kế tối giản, máy tự động 502.3 SD, vỏ vàng 18k 40mm.",
+        price: 110000000,
+        sale_price: 88000000,
+        status: 1,
+        quantity: 1,
+        views: 1500,
+        sex: "Nam",
+        case_diameter: 40,
+        style: "Cổ điển",
+        features: "Lịch ngày, Mặt số guilloché",
+        water_resistance: "30m",
+        thickness: 6.1,
+        color: "Vàng",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Vàng 18k",
+        sold: 2,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "breguet-reine-de-naples-9835-limited-edition-36-5x28-45mm.png_980_980.webp", 
+          alt: "Breguet Classique 7147" 
+        },
+        images: [],
+        created_at: "2024-01-03T14:30:00Z",
+        updated_at: "2024-01-12T09:45:00Z"
+      },
+      {
+        _id: "shop_9",
+        brand: { name: "Vacheron Constantin" },
+        name: "Vacheron Constantin Overseas 4500V - Đồng hồ thể thao",
+        description: "Đồng hồ Vacheron Constantin Overseas với thiết kế thanh lịch, máy tự động 5100, vỏ thép không gỉ 41mm.",
+        price: 88000000,
+        sale_price: 0,
+        status: 1,
+        quantity: 3,
+        views: 950,
+        sex: "Nam",
+        case_diameter: 41,
+        style: "Thể thao",
+        features: "Lịch ngày, Chống nước",
+        water_resistance: "150m",
+        thickness: 11,
+        color: "Xanh dương",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo thép",
+        case_material: "Thép không gỉ",
+        sold: 5,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "bulova-surveyor-watch-41mm1.png.webp", 
+          alt: "Vacheron Constantin Overseas 4500V" 
+        },
+        images: [],
+        created_at: "2024-01-12T11:15:00Z",
+        updated_at: "2024-01-20T13:45:00Z"
+      },
+      {
+        _id: "shop_10",
+        brand: { name: "Jaeger-LeCoultre" },
+        name: "Jaeger-LeCoultre Reverso Classic - Đồng hồ cổ điển",
+        description: "Đồng hồ Jaeger-LeCoultre Reverso với thiết kế mặt số có thể lật, máy tự động 822A/2, vỏ thép không gỉ 45.6mm x 27.4mm.",
+        price: 75000000,
+        sale_price: 0,
+        status: 1,
+        quantity: 2,
+        views: 800,
+        sex: "Nam",
+        case_diameter: 45.6,
+        style: "Cổ điển",
+        features: "Mặt số lật, Lịch ngày",
+        water_resistance: "30m",
+        thickness: 9.5,
+        color: "Bạc",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 4,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "bulova-accutron-masella-diamond-markers-watch-31mm1.jpg.webp", 
+          alt: "Jaeger-LeCoultre Reverso Classic" 
+        },
+        images: [],
+        created_at: "2024-01-06T08:20:00Z",
+        updated_at: "2024-01-14T12:10:00Z"
+      },
+      {
+        _id: "shop_11",
+        brand: { name: "Hublot" },
+        name: "Hublot Big Bang Unico - Đồng hồ thể thao",
+        description: "Đồng hồ Hublot Big Bang Unico với thiết kế hiện đại, máy tự động HUB1242, vỏ thép không gỉ 45mm.",
+        price: 55000000,
+        sale_price: 44000000,
+        status: 1,
+        quantity: 8,
+        views: 1100,
+        sex: "Nam",
+        case_diameter: 45,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày, Chống nước",
+        water_resistance: "100m",
+        thickness: 14.5,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo cao su",
+        case_material: "Thép không gỉ",
+        sold: 11,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "bulova-accutron-masella-chronograph-black-watch-40mm1.jpg.webp", 
+          alt: "Hublot Big Bang Unico" 
+        },
+        images: [],
+        created_at: "2024-01-09T13:45:00Z",
+        updated_at: "2024-01-17T10:20:00Z"
+      },
+      {
+        _id: "shop_12",
+        brand: { name: "Tag Heuer" },
+        name: "Tag Heuer Carrera Chronograph - Đồng hồ chronograph",
+        description: "Đồng hồ Tag Heuer Carrera Chronograph với thiết kế thể thao, máy tự động Calibre 16, vỏ thép không gỉ 41mm.",
+        price: 35000000,
+        sale_price: 28000000,
+        status: 1,
+        quantity: 12,
+        views: 750,
+        sex: "Nam",
+        case_diameter: 41,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày",
+        water_resistance: "100m",
+        thickness: 14.5,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 18,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "bulova-accutron-masella-diamond-markers-watch-31mm1.jpg.webp", 
+          alt: "Tag Heuer Carrera Chronograph" 
+        },
+        images: [],
+        created_at: "2024-01-11T16:30:00Z",
+        updated_at: "2024-01-19T09:15:00Z"
+      },
+      {
+        _id: "shop_13",
+        brand: { name: "Tissot" },
+        name: "Tissot T-Touch Connect Solar - Đồng hồ smartwatch",
+        description: "Đồng hồ Tissot T-Touch Connect Solar với công nghệ cảm ứng, năng lượng mặt trời, vỏ thép không gỉ 45mm.",
+        price: 18000000,
+        sale_price: 14400000,
+        status: 1,
+        quantity: 15,
+        views: 600,
+        sex: "Nam",
+        case_diameter: 45,
+        style: "Thể thao",
+        features: "Cảm ứng, Năng lượng mặt trời, GPS",
+        water_resistance: "100m",
+        thickness: 13.5,
+        color: "Đen",
+        machine_type: "Quartz",
+        strap_material: "Dây đeo cao su",
+        case_material: "Thép không gỉ",
+        sold: 25,
+        categories: [{ name: "Đồng hồ smartwatch" }],
+        main_image: { 
+          image: "bulova-accutron-2es8a001-accutron-dna-watch-45mm1.png.webp", 
+          alt: "Tissot T-Touch Connect Solar" 
+        },
+        images: [],
+        created_at: "2024-01-07T12:20:00Z",
+        updated_at: "2024-01-15T14:30:00Z"
+      },
+      {
+        _id: "shop_14",
+        brand: { name: "Seiko" },
+        name: "Seiko Prospex Diver - Đồng hồ lặn",
+        description: "Đồng hồ Seiko Prospex Diver với khả năng chống nước 200m, máy tự động 4R36, vỏ thép không gỉ 42.5mm.",
+        price: 12000000,
+        sale_price: 9600000,
+        status: 1,
+        quantity: 20,
+        views: 450,
+        sex: "Nam",
+        case_diameter: 42.5,
+        style: "Thể thao",
+        features: "Lịch ngày, Chống nước cao",
+        water_resistance: "200m",
+        thickness: 13.4,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo cao su",
+        case_material: "Thép không gỉ",
+        sold: 30,
+        categories: [{ name: "Đồng hồ lặn" }],
+        main_image: { 
+          image: "bulova-surveyor-watch-41mm1.png.webp", 
+          alt: "Seiko Prospex Diver" 
+        },
+        images: [],
+        created_at: "2024-01-04T10:15:00Z",
+        updated_at: "2024-01-13T11:45:00Z"
+      },
+      {
+        _id: "shop_15",
+        brand: { name: "Citizen" },
+        name: "Citizen Eco-Drive Promaster - Đồng hồ thể thao",
+        description: "Đồng hồ Citizen Eco-Drive Promaster với công nghệ Eco-Drive, khả năng chống nước 200m, vỏ thép không gỉ 44mm.",
+        price: 8000000,
+        sale_price: 6400000,
+        status: 1,
+        quantity: 25,
+        views: 380,
+        sex: "Nam",
+        case_diameter: 44,
+        style: "Thể thao",
+        features: "Eco-Drive, Lịch ngày, Chống nước",
+        water_resistance: "200m",
+        thickness: 12.5,
+        color: "Xanh dương",
+        machine_type: "Quartz",
+        strap_material: "Dây đeo cao su",
+        case_material: "Thép không gỉ",
+        sold: 35,
+        categories: [{ name: "Đồng hồ thể thao" }],
+        main_image: { 
+          image: "bulova-accutron-masella-chronograph-black-watch-40mm1.jpg.webp", 
+          alt: "Citizen Eco-Drive Promaster" 
+        },
+        images: [],
+        created_at: "2024-01-02T09:30:00Z",
+        updated_at: "2024-01-11T16:20:00Z"
+      },
+      {
+        _id: "shop_16",
+        brand: { name: "Cartier" },
+        name: "Cartier Ballon Bleu - Đồng hồ nữ thanh lịch",
+        description: "Đồng hồ Cartier Ballon Bleu với thiết kế tròn thanh lịch, máy tự động 076, vỏ thép không gỉ 36mm.",
+        price: 38000000,
+        sale_price: 30400000,
+        status: 1,
+        quantity: 6,
+        views: 520,
+        sex: "Nữ",
+        case_diameter: 36,
+        style: "Cổ điển",
+        features: "Lịch ngày, Dây đeo da",
+        water_resistance: "30m",
+        thickness: 12.1,
+        color: "Bạc",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 8,
+        categories: [{ name: "Đồng hồ nữ" }],
+        main_image: { 
+          image: "baume--mercier-hampton-10709-blue-watch-35-x-22mm1.png.webp", 
+          alt: "Cartier Ballon Bleu" 
+        },
+        images: [],
+        created_at: "2024-01-14T14:20:00Z",
+        updated_at: "2024-01-21T10:30:00Z"
+      },
+      {
+        _id: "shop_17",
+        brand: { name: "Chanel" },
+        name: "Chanel J12 - Đồng hồ nữ cao cấp",
+        description: "Đồng hồ Chanel J12 với thiết kế hiện đại, vỏ gốm đen, máy tự động, vỏ 38mm.",
+        price: 42000000,
+        sale_price: 33600000,
+        status: 1,
+        quantity: 4,
+        views: 680,
+        sex: "Nữ",
+        case_diameter: 38,
+        style: "Hiện đại",
+        features: "Lịch ngày, Chống nước",
+        water_resistance: "200m",
+        thickness: 12.5,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo gốm",
+        case_material: "Gốm",
+        sold: 6,
+        categories: [{ name: "Đồng hồ nữ" }],
+        main_image: { 
+          image: "bulova-accutron-masella-diamond-markers-watch-31mm1.jpg.webp", 
+          alt: "Chanel J12" 
+        },
+        images: [],
+        created_at: "2024-01-13T15:30:00Z",
+        updated_at: "2024-01-20T12:45:00Z"
+      },
+      {
+        _id: "shop_18",
+        brand: { name: "Dior" },
+        name: "Dior VIII Grand Bal - Đồng hồ nữ",
+        description: "Đồng hồ Dior VIII Grand Bal với thiết kế độc đáo, máy tự động với rotor trang trí, vỏ 36mm.",
+        price: 35000000,
+        sale_price: 28000000,
+        status: 1,
+        quantity: 3,
+        views: 420,
+        sex: "Nữ",
+        case_diameter: 36,
+        style: "Cổ điển",
+        features: "Lịch ngày, Rotor trang trí",
+        water_resistance: "50m",
+        thickness: 11.5,
+        color: "Trắng",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 4,
+        categories: [{ name: "Đồng hồ nữ" }],
+        main_image: { 
+          image: "baume--mercier-hampton-10709-blue-watch-35-x-22mm1.png.webp", 
+          alt: "Dior VIII Grand Bal" 
+        },
+        images: [],
+        created_at: "2024-01-16T11:20:00Z",
+        updated_at: "2024-01-22T09:15:00Z"
+      },
+      {
+        _id: "shop_19",
+        brand: { name: "Chopard" },
+        name: "Chopard Happy Sport - Đồng hồ nữ",
+        description: "Đồng hồ Chopard Happy Sport với thiết kế vui tươi, kim cương di chuyển, vỏ thép 36mm.",
+        price: 28000000,
+        sale_price: 22400000,
+        status: 1,
+        quantity: 8,
+        views: 350,
+        sex: "Nữ",
+        case_diameter: 36,
+        style: "Hiện đại",
+        features: "Kim cương di chuyển, Lịch ngày",
+        water_resistance: "30m",
+        thickness: 10.5,
+        color: "Bạc",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo thép",
+        case_material: "Thép không gỉ",
+        sold: 12,
+        categories: [{ name: "Đồng hồ nữ" }],
+        main_image: { 
+          image: "bulova-accutron-masella-diamond-markers-watch-31mm1.jpg.webp", 
+          alt: "Chopard Happy Sport" 
+        },
+        images: [],
+        created_at: "2024-01-10T13:45:00Z",
+        updated_at: "2024-01-18T16:30:00Z"
+      },
+      {
+        _id: "shop_20",
+        brand: { name: "Piaget" },
+        name: "Piaget Altiplano - Đồng hồ siêu mỏng",
+        description: "Đồng hồ Piaget Altiplano với thiết kế siêu mỏng, máy tự động 1200P, vỏ vàng 18k 40mm.",
+        price: 95000000,
+        sale_price: 76000000,
+        status: 1,
+        quantity: 2,
+        views: 1200,
+        sex: "Nam",
+        case_diameter: 40,
+        style: "Cổ điển",
+        features: "Siêu mỏng, Lịch ngày",
+        water_resistance: "20m",
+        thickness: 3.65,
+        color: "Vàng",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Vàng 18k",
+        sold: 3,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "breguet-reine-de-naples-9835-limited-edition-36-5x28-45mm.png_980_980.webp", 
+          alt: "Piaget Altiplano" 
+        },
+        images: [],
+        created_at: "2024-01-05T10:15:00Z",
+        updated_at: "2024-01-14T13:20:00Z"
+      },
+      {
+        _id: "shop_21",
+        brand: { name: "Panerai" },
+        name: "Panerai Luminor Marina - Đồng hồ lặn",
+        description: "Đồng hồ Panerai Luminor Marina với thiết kế độc đáo, máy tự động P.9010, vỏ thép 44mm.",
+        price: 45000000,
+        sale_price: 36000000,
+        status: 1,
+        quantity: 7,
+        views: 850,
+        sex: "Nam",
+        case_diameter: 44,
+        style: "Thể thao",
+        features: "Lịch ngày, Chống nước cao",
+        water_resistance: "300m",
+        thickness: 15.6,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo cao su",
+        case_material: "Thép không gỉ",
+        sold: 9,
+        categories: [{ name: "Đồng hồ lặn" }],
+        main_image: { 
+          image: "bulova-surveyor-watch-41mm1.png.webp", 
+          alt: "Panerai Luminor Marina" 
+        },
+        images: [],
+        created_at: "2024-01-08T14:30:00Z",
+        updated_at: "2024-01-17T11:45:00Z"
+      },
+      {
+        _id: "shop_22",
+        brand: { name: "Rolex" },
+        name: "Rolex Daytona 116500LN - Đồng hồ chronograph",
+        description: "Đồng hồ Rolex Daytona với thiết kế chronograph huyền thoại, máy tự động 4130, vỏ thép 40mm.",
+        price: 150000000,
+        sale_price: 0,
+        status: 1,
+        quantity: 1,
+        views: 2500,
+        sex: "Nam",
+        case_diameter: 40,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày",
+        water_resistance: "100m",
+        thickness: 12.5,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo thép",
+        case_material: "Thép không gỉ",
+        sold: 1,
+        categories: [{ name: "Đồng hồ chronograph" }],
+        main_image: { 
+          image: "breguet-classique-quantieme-perpetuel-7327br-11-9vu-39mm.jpg.webp", 
+          alt: "Rolex Daytona 116500LN" 
+        },
+        images: [],
+        created_at: "2024-01-01T08:00:00Z",
+        updated_at: "2024-01-10T15:30:00Z"
+      },
+      {
+        _id: "shop_23",
+        brand: { name: "Omega" },
+        name: "Omega Speedmaster Professional - Đồng hồ chronograph",
+        description: "Đồng hồ Omega Speedmaster Professional với lịch sử lên mặt trăng, máy thủ công 1861, vỏ thép 42mm.",
+        price: 55000000,
+        sale_price: 44000000,
+        status: 1,
+        quantity: 5,
+        views: 1100,
+        sex: "Nam",
+        case_diameter: 42,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày",
+        water_resistance: "50m",
+        thickness: 13.2,
+        color: "Đen",
+        machine_type: "Thủ công",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 7,
+        categories: [{ name: "Đồng hồ chronograph" }],
+        main_image: { 
+          image: "bulova-accutron-masella-chronograph-black-watch-40mm1.jpg.webp", 
+          alt: "Omega Speedmaster Professional" 
+        },
+        images: [],
+        created_at: "2024-01-12T09:45:00Z",
+        updated_at: "2024-01-19T14:20:00Z"
+      },
+      {
+        _id: "shop_24",
+        brand: { name: "Longines" },
+        name: "Longines Master Collection - Đồng hồ cổ điển",
+        description: "Đồng hồ Longines Master Collection với thiết kế cổ điển, máy tự động L888, vỏ thép 40mm.",
+        price: 22000000,
+        sale_price: 17600000,
+        status: 1,
+        quantity: 12,
+        views: 380,
+        sex: "Nam",
+        case_diameter: 40,
+        style: "Cổ điển",
+        features: "Lịch ngày, Dây đeo da",
+        water_resistance: "30m",
+        thickness: 9.5,
+        color: "Trắng",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 15,
+        categories: [{ name: "Đồng hồ cổ điển" }],
+        main_image: { 
+          image: "bulova-sutton-automatic-34-5mm1.png.webp", 
+          alt: "Longines Master Collection" 
+        },
+        images: [],
+        created_at: "2024-01-06T16:20:00Z",
+        updated_at: "2024-01-15T12:10:00Z"
+      },
+      {
+        _id: "shop_25",
+        brand: { name: "IWC" },
+        name: "IWC Pilot's Watch - Đồng hồ phi công",
+        description: "Đồng hồ IWC Pilot's Watch với thiết kế phi công, máy tự động 32110, vỏ thép 40mm.",
+        price: 48000000,
+        sale_price: 38400000,
+        status: 1,
+        quantity: 6,
+        views: 720,
+        sex: "Nam",
+        case_diameter: 40,
+        style: "Thể thao",
+        features: "Lịch ngày, Chống nước",
+        water_resistance: "60m",
+        thickness: 11.4,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 8,
+        categories: [{ name: "Đồng hồ thể thao" }],
+        main_image: { 
+          image: "bulova-accutron-2es8a001-accutron-dna-watch-45mm1.png.webp", 
+          alt: "IWC Pilot's Watch" 
+        },
+        images: [],
+        created_at: "2024-01-09T13:15:00Z",
+        updated_at: "2024-01-18T10:45:00Z"
+      },
+      {
+        _id: "shop_26",
+        brand: { name: "Breguet" },
+        name: "Breguet Marine - Đồng hồ thể thao",
+        description: "Đồng hồ Breguet Marine với thiết kế thể thao, máy tự động 777A, vỏ thép 40mm.",
+        price: 85000000,
+        sale_price: 68000000,
+        status: 1,
+        quantity: 3,
+        views: 950,
+        sex: "Nam",
+        case_diameter: 40,
+        style: "Thể thao",
+        features: "Lịch ngày, Chống nước",
+        water_resistance: "100m",
+        thickness: 11.8,
+        color: "Bạc",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 5,
+        categories: [{ name: "Đồng hồ thể thao" }],
+        main_image: { 
+          image: "breguet-tradition-dame-7038bb-1t-9v6-d00d-watch-37mm1.jpg.webp", 
+          alt: "Breguet Marine" 
+        },
+        images: [],
+        created_at: "2024-01-11T12:30:00Z",
+        updated_at: "2024-01-20T09:15:00Z"
+      },
+      {
+        _id: "shop_27",
+        brand: { name: "Vacheron Constantin" },
+        name: "Vacheron Constantin Patrimony - Đồng hồ cổ điển",
+        description: "Đồng hồ Vacheron Constantin Patrimony với thiết kế tối giản, máy tự động 2450, vỏ vàng 18k 40mm.",
+        price: 120000000,
+        sale_price: 96000000,
+        status: 1,
+        quantity: 2,
+        views: 1800,
+        sex: "Nam",
+        case_diameter: 40,
+        style: "Cổ điển",
+        features: "Lịch ngày, Siêu mỏng",
+        water_resistance: "30m",
+        thickness: 8.4,
+        color: "Vàng",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Vàng 18k",
+        sold: 2,
+        categories: [{ name: "Đồng hồ cổ điển" }],
+        main_image: { 
+          image: "breguet-reine-de-naples-9835-limited-edition-36-5x28-45mm.png_980_980.webp", 
+          alt: "Vacheron Constantin Patrimony" 
+        },
+        images: [],
+        created_at: "2024-01-04T11:45:00Z",
+        updated_at: "2024-01-13T16:20:00Z"
+      },
+      {
+        _id: "shop_28",
+        brand: { name: "Jaeger-LeCoultre" },
+        name: "Jaeger-LeCoultre Master Ultra Thin - Đồng hồ siêu mỏng",
+        description: "Đồng hồ Jaeger-LeCoultre Master Ultra Thin với thiết kế siêu mỏng, máy tự động 896, vỏ thép 39mm.",
+        price: 68000000,
+        sale_price: 54400000,
+        status: 1,
+        quantity: 4,
+        views: 650,
+        sex: "Nam",
+        case_diameter: 39,
+        style: "Cổ điển",
+        features: "Siêu mỏng, Lịch ngày",
+        water_resistance: "50m",
+        thickness: 7.8,
+        color: "Bạc",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 6,
+        categories: [{ name: "Đồng hồ cổ điển" }],
+        main_image: { 
+          image: "bulova-accutron-masella-diamond-markers-watch-31mm1.jpg.webp", 
+          alt: "Jaeger-LeCoultre Master Ultra Thin" 
+        },
+        images: [],
+        created_at: "2024-01-07T14:20:00Z",
+        updated_at: "2024-01-16T11:30:00Z"
+      },
+      {
+        _id: "shop_29",
+        brand: { name: "Hublot" },
+        name: "Hublot Classic Fusion - Đồng hồ thể thao",
+        description: "Đồng hồ Hublot Classic Fusion với thiết kế hiện đại, máy tự động HUB1112, vỏ thép 42mm.",
+        price: 42000000,
+        sale_price: 33600000,
+        status: 1,
+        quantity: 9,
+        views: 580,
+        sex: "Nam",
+        case_diameter: 42,
+        style: "Thể thao",
+        features: "Lịch ngày, Chống nước",
+        water_resistance: "50m",
+        thickness: 9.1,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 11,
+        categories: [{ name: "Đồng hồ thể thao" }],
+        main_image: { 
+          image: "bulova-accutron-masella-chronograph-black-watch-40mm1.jpg.webp", 
+          alt: "Hublot Classic Fusion" 
+        },
+        images: [],
+        created_at: "2024-01-14T10:15:00Z",
+        updated_at: "2024-01-21T13:45:00Z"
+      },
+      {
+        _id: "shop_30",
+        brand: { name: "Tag Heuer" },
+        name: "Tag Heuer Monaco - Đồng hồ chronograph",
+        description: "Đồng hồ Tag Heuer Monaco với thiết kế hình vuông độc đáo, máy tự động Calibre 11, vỏ thép 39mm.",
+        price: 32000000,
+        sale_price: 25600000,
+        status: 1,
+        quantity: 10,
+        views: 480,
+        sex: "Nam",
+        case_diameter: 39,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày",
+        water_resistance: "100m",
+        thickness: 14.7,
+        color: "Xanh dương",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 14,
+        categories: [{ name: "Đồng hồ chronograph" }],
+        main_image: { 
+          image: "bulova-accutron-masella-diamond-markers-watch-31mm1.jpg.webp", 
+          alt: "Tag Heuer Monaco" 
+        },
+        images: [],
+        created_at: "2024-01-15T16:40:00Z",
+        updated_at: "2024-01-22T08:30:00Z"
+      }
+    ];
+
+    // Filter products based on selected criteria
+    let filteredProducts = mockProducts;
+
+    // Filter by category
     if (selectedCategory && selectedCategory !== 'Tất cả') {
-      params.append('category', selectedCategory);
+      filteredProducts = filteredProducts.filter(p => 
+        p.categories.some(cat => cat.name === selectedCategory)
+      );
     }
+
+    // Filter by brand
     if (selectedBrand) {
-      params.append('brand', selectedBrand);
-    }
-    if (priceRange[1] < 20000000) {
-      params.append('price_max', priceRange[1].toString());
-    }
-    if (sort !== 'default') {
-      params.append('sort', sort);
+      filteredProducts = filteredProducts.filter(p => p.brand.name === selectedBrand);
     }
 
-    const url = `${API_URL}/api/sp?${params.toString()}`;
+    // Filter by price
+    filteredProducts = filteredProducts.filter(p => p.price <= priceRange[1]);
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data.list || []);
-        setTotalPages(data.totalPages || 1);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        // Có thể thêm xử lý lỗi ở đây
-      });
+    // Sort products
+    if (sort === 'price-asc') {
+      filteredProducts.sort((a, b) => (a.sale_price || a.price) - (b.sale_price || b.price));
+    } else if (sort === 'price-desc') {
+      filteredProducts.sort((a, b) => (b.sale_price || b.price) - (a.sale_price || a.price));
+    }
+
+    // Pagination
+    const itemsPerPage = 12;
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+
+    setProducts(paginatedProducts);
+    setTotalPages(Math.ceil(filteredProducts.length / itemsPerPage));
+    setLoading(false);
   }, [selectedCategory, priceRange, sort, page, selectedBrand]);
 
   useEffect(() => {
@@ -122,9 +1259,130 @@ export default function ShopPage() {
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/products/top-rated?limit=4`)
-      .then(res => res.json())
-      .then(data => setBestSellers(data));
+    // Dữ liệu giả cho best sellers
+    const mockBestSellers: IProduct[] = [
+      {
+        _id: "best_1",
+        brand: { name: "Rolex" },
+        name: "Rolex Submariner Date 126610LN",
+        description: "Đồng hồ lặn cao cấp",
+        price: 85000000,
+        sale_price: 72000000,
+        status: 1,
+        quantity: 5,
+        views: 1250,
+        sex: "Nam",
+        case_diameter: 41,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày, Chống nước",
+        water_resistance: "300m",
+        thickness: 12.5,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo thép",
+        case_material: "Thép không gỉ",
+        sold: 12,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "breguet-classique-quantieme-perpetuel-7327br-11-9vu-39mm.jpg.webp", 
+          alt: "Rolex Submariner Date 126610LN" 
+        },
+        images: [],
+        created_at: "2024-01-15T10:30:00Z",
+        updated_at: "2024-01-20T14:45:00Z"
+      },
+      {
+        _id: "best_2",
+        brand: { name: "Omega" },
+        name: "Omega Seamaster Planet Ocean",
+        description: "Đồng hồ thể thao dưới nước",
+        price: 65000000,
+        sale_price: 52000000,
+        status: 1,
+        quantity: 3,
+        views: 890,
+        sex: "Nam",
+        case_diameter: 43.5,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày, Chống nước cao",
+        water_resistance: "600m",
+        thickness: 14.5,
+        color: "Xanh dương",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo cao su",
+        case_material: "Thép không gỉ",
+        sold: 8,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "bulova-accu-swiss-tellaro-automatic-watch-43mm4.jpg.webp", 
+          alt: "Omega Seamaster Planet Ocean" 
+        },
+        images: [],
+        created_at: "2024-01-10T09:15:00Z",
+        updated_at: "2024-01-18T16:20:00Z"
+      },
+      {
+        _id: "best_3",
+        brand: { name: "Cartier" },
+        name: "Cartier Tank Solo Automatic",
+        description: "Đồng hồ thanh lịch",
+        price: 45000000,
+        sale_price: 36000000,
+        status: 1,
+        quantity: 7,
+        views: 650,
+        sex: "Nữ",
+        case_diameter: 27.4,
+        style: "Cổ điển",
+        features: "Lịch ngày, Dây đeo da",
+        water_resistance: "30m",
+        thickness: 6.6,
+        color: "Bạc",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 15,
+        categories: [{ name: "Đồng hồ nữ" }],
+        main_image: { 
+          image: "baume--mercier-hampton-10709-blue-watch-35-x-22mm1.png.webp", 
+          alt: "Cartier Tank Solo Automatic" 
+        },
+        images: [],
+        created_at: "2024-01-12T11:45:00Z",
+        updated_at: "2024-01-19T13:30:00Z"
+      },
+      {
+        _id: "best_4",
+        brand: { name: "Longines" },
+        name: "Longines Heritage Classic",
+        description: "Đồng hồ cổ điển",
+        price: 28000000,
+        sale_price: 22400000,
+        status: 1,
+        quantity: 10,
+        views: 420,
+        sex: "Nam",
+        case_diameter: 40,
+        style: "Cổ điển",
+        features: "Lịch ngày, Dây đeo da",
+        water_resistance: "30m",
+        thickness: 11.5,
+        color: "Trắng",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 6,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "bulova-sutton-automatic-34-5mm1.png.webp", 
+          alt: "Longines Heritage Classic" 
+        },
+        images: [],
+        created_at: "2024-01-08T08:30:00Z",
+        updated_at: "2024-01-16T15:45:00Z"
+      }
+    ];
+    setBestSellers(mockBestSellers);
   }, []);
 
   // Tính toán danh mục hiển thị
@@ -160,7 +1418,7 @@ export default function ShopPage() {
                 style={{ width: 50, height: 50, marginBottom: 2 }}
               >
                 <img
-                  src={`/upload/brand/${brand.image}.webp`}
+                  src={`/upload/brand/${brand.image}.png.webp`}
                   alt={brand.name}
                   className="object-contain transition-transform duration-200 group-hover:scale-110"
                   style={{ width: 50, height: 50 }}
@@ -263,7 +1521,7 @@ export default function ShopPage() {
                   style={{ width: 50, height: 50, marginBottom: 2 }}
                 >
                   <img
-                    src={`/upload/brand/${brand.image}.webp`}
+                    src={`/upload/brand/${brand.image}.png.webp`}
                     alt={brand.name}
                     className="object-contain transition-transform duration-200 group-hover:scale-110"
                     style={{ width: 50, height: 50 }}
