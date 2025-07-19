@@ -37,13 +37,162 @@ export default function ProductDetail() {
   useEffect(() => {
     if (!id) return;
 
+    // Dữ liệu giả cho sản phẩm
+    const mockProducts: { [key: string]: IProduct } = {
+      "mock_sale_1": {
+        _id: "mock_sale_1",
+        brand: { name: "Rolex" },
+        name: "Rolex Submariner Date 126610LN - Đồng hồ lặn cao cấp",
+        description: "Đồng hồ Rolex Submariner Date với thiết kế cổ điển, khả năng chống nước 300m, máy tự động 3235, vỏ thép không gỉ 41mm. Sản phẩm chính hãng 100%, bảo hành toàn cầu 5 năm.\n\nĐặc điểm nổi bật:\n• Máy tự động Rolex 3235 với độ chính xác cao\n• Khả năng chống nước 300m (1000ft)\n• Vỏ thép không gỉ Oystersteel 41mm\n• Mặt số màu đen với kim và vạch số phát sáng\n• Dây đeo Oyster với khóa Oysterlock\n• Chức năng lịch ngày với kính lúp Cyclops\n• Bảo hành toàn cầu 5 năm",
+        price: 85000000,
+        sale_price: 72000000,
+        status: 1,
+        quantity: 5,
+        views: 1250,
+        sex: "Nam",
+        case_diameter: 41,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày, Chống nước",
+        water_resistance: "300m",
+        thickness: 12.5,
+        color: "Đen",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo thép",
+        case_material: "Thép không gỉ",
+        sold: 12,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "rolex-submariner-sale.jpg", 
+          alt: "Rolex Submariner Date 126610LN" 
+        },
+        images: [
+          { _id: "img1", is_main: true, image: "/upload/product/rolex-submariner-sale.jpg", alt: "Rolex Submariner Date 126610LN" },
+          { _id: "img2", is_main: false, image: "/upload/product/rolex-submariner-2.jpg", alt: "Rolex Submariner Date 126610LN - Góc nghiêng" },
+          { _id: "img3", is_main: false, image: "/upload/product/rolex-submariner-3.jpg", alt: "Rolex Submariner Date 126610LN - Mặt sau" },
+          { _id: "img4", is_main: false, image: "/upload/product/rolex-submariner-4.jpg", alt: "Rolex Submariner Date 126610LN - Chi tiết" }
+        ],
+        created_at: "2024-01-15T10:30:00Z",
+        updated_at: "2024-01-20T14:45:00Z"
+      },
+      "mock_sale_2": {
+        _id: "mock_sale_2",
+        brand: { name: "Omega" },
+        name: "Omega Seamaster Planet Ocean 600M Co-Axial Master Chronometer",
+        description: "Đồng hồ Omega Seamaster Planet Ocean với khả năng chống nước 600m, máy Co-Axial Master Chronometer 8900, vỏ thép 43.5mm. Thiết kế hiện đại, phù hợp cho các hoạt động thể thao dưới nước.\n\nĐặc điểm nổi bật:\n• Máy Co-Axial Master Chronometer 8900\n• Khả năng chống nước 600m (2000ft)\n• Vỏ thép không gỉ 43.5mm với khung bezel ceramic\n• Mặt số màu xanh dương với kim và vạch số phát sáng\n• Dây đeo cao su với khóa gập\n• Chức năng chronograph và lịch ngày\n• Bảo hành chính hãng 5 năm",
+        price: 65000000,
+        sale_price: 52000000,
+        status: 1,
+        quantity: 3,
+        views: 890,
+        sex: "Nam",
+        case_diameter: 43.5,
+        style: "Thể thao",
+        features: "Chronograph, Lịch ngày, Chống nước cao",
+        water_resistance: "600m",
+        thickness: 14.5,
+        color: "Xanh dương",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo cao su",
+        case_material: "Thép không gỉ",
+        sold: 8,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "omega-seamaster-sale.jpg", 
+          alt: "Omega Seamaster Planet Ocean" 
+        },
+        images: [
+          { _id: "img4", is_main: true, image: "/upload/product/omega-seamaster-sale.jpg", alt: "Omega Seamaster Planet Ocean" },
+          { _id: "img5", is_main: false, image: "/upload/product/omega-seamaster-2.jpg", alt: "Omega Seamaster Planet Ocean - Góc nghiêng" },
+          { _id: "img6", is_main: false, image: "/upload/product/omega-seamaster-3.jpg", alt: "Omega Seamaster Planet Ocean - Mặt sau" }
+        ],
+        created_at: "2024-01-10T09:15:00Z",
+        updated_at: "2024-01-18T16:20:00Z"
+      },
+      "mock_sale_3": {
+        _id: "mock_sale_3",
+        brand: { name: "Cartier" },
+        name: "Cartier Tank Solo Automatic - Đồng hồ thanh lịch",
+        description: "Đồng hồ Cartier Tank Solo với thiết kế hình chữ nhật độc đáo, máy tự động 1847 MC, vỏ thép 27.4mm x 34.8mm. Phù hợp cho phong cách công sở và các dịp trang trọng.\n\nĐặc điểm nổi bật:\n• Máy tự động Cartier 1847 MC\n• Vỏ thép không gỉ hình chữ nhật 27.4mm x 34.8mm\n• Mặt số màu bạc với kim và vạch số thanh lịch\n• Dây đeo da với khóa gập\n• Thiết kế cổ điển, phù hợp mọi dịp\n• Bảo hành chính hãng 2 năm",
+        price: 45000000,
+        sale_price: 36000000,
+        status: 1,
+        quantity: 7,
+        views: 650,
+        sex: "Nữ",
+        case_diameter: 27.4,
+        style: "Cổ điển",
+        features: "Lịch ngày, Dây đeo da",
+        water_resistance: "30m",
+        thickness: 6.6,
+        color: "Bạc",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 15,
+        categories: [{ name: "Đồng hồ nữ" }],
+        main_image: { 
+          image: "cartier-tank-sale.jpg", 
+          alt: "Cartier Tank Solo Automatic" 
+        },
+        images: [
+          { _id: "img6", is_main: true, image: "/upload/product/cartier-tank-sale.jpg", alt: "Cartier Tank Solo Automatic" },
+          { _id: "img7", is_main: false, image: "/upload/product/cartier-tank-2.jpg", alt: "Cartier Tank Solo Automatic - Góc nghiêng" },
+          { _id: "img8", is_main: false, image: "/upload/product/cartier-tank-3.jpg", alt: "Cartier Tank Solo Automatic - Chi tiết" }
+        ],
+        created_at: "2024-01-12T11:45:00Z",
+        updated_at: "2024-01-19T13:30:00Z"
+      },
+      "mock_sale_4": {
+        _id: "mock_sale_4",
+        brand: { name: "Longines" },
+        name: "Longines Heritage Classic - Đồng hồ cổ điển",
+        description: "Đồng hồ Longines Heritage Classic với thiết kế retro, máy tự động L888, vỏ thép 40mm. Lấy cảm hứng từ những mẫu đồng hồ cổ điển của thập niên 1940-1950.\n\nĐặc điểm nổi bật:\n• Máy tự động Longines L888\n• Vỏ thép không gỉ 40mm\n• Mặt số màu trắng với kim và vạch số cổ điển\n• Dây đeo da với khóa gập\n• Thiết kế retro, phù hợp phong cách vintage\n• Bảo hành chính hãng 2 năm",
+        price: 28000000,
+        sale_price: 22400000,
+        status: 1,
+        quantity: 10,
+        views: 420,
+        sex: "Nam",
+        case_diameter: 40,
+        style: "Cổ điển",
+        features: "Lịch ngày, Dây đeo da",
+        water_resistance: "30m",
+        thickness: 11.5,
+        color: "Trắng",
+        machine_type: "Tự động",
+        strap_material: "Dây đeo da",
+        case_material: "Thép không gỉ",
+        sold: 6,
+        categories: [{ name: "Đồng hồ nam" }],
+        main_image: { 
+          image: "longines-heritage-sale.jpg", 
+          alt: "Longines Heritage Classic" 
+        },
+        images: [
+          { _id: "img8", is_main: true, image: "/upload/product/longines-heritage-sale.jpg", alt: "Longines Heritage Classic" },
+          { _id: "img9", is_main: false, image: "/upload/product/longines-heritage-2.jpg", alt: "Longines Heritage Classic - Góc nghiêng" },
+          { _id: "img10", is_main: false, image: "/upload/product/longines-heritage-3.jpg", alt: "Longines Heritage Classic - Chi tiết" }
+        ],
+        created_at: "2024-01-08T08:30:00Z",
+        updated_at: "2024-01-16T15:45:00Z"
+      }
+    };
+
+    // Kiểm tra nếu là sản phẩm giả
+    if (mockProducts[id]) {
+      setProduct(mockProducts[id]);
+      setCurrentImg(0);
+      return;
+    }
+
+    // Nếu không phải sản phẩm giả, fetch từ API như bình thường
     async function fetchProduct() {
       try {
         const res = await fetch(`${API_URL}/api/product/${id}`);
         if (!res.ok) throw new Error("Lấy sản phẩm thất bại");
         const data = await res.json(); 
 
-          /* ---------- NORMALIZE ---------- */
+        /* ---------- NORMALIZE ---------- */
         // 1. Sắp xếp: ảnh chính lên đầu
         const imgObjects = [...data.images].sort(
           (a: IRawImage, b: IRawImage) => (b.is_main ? 1 : 0) - (a.is_main ? 1 : 0)
@@ -51,12 +200,6 @@ export default function ProductDetail() {
           image: `/upload/product/${i.image}`,
           alt: i.alt || data.name
         }));
-        
-
-        // // 2. Chuyển thành mảng string, kèm đường dẫn /upload/product/
-        // const imgUrls: string[] = sorted.map(
-        //   (i: IRawImage) => `/upload/product/${i.image}`
-        // );
 
         // 3. Trả về object mới, trong đó images là string[]
         const cleanProduct: IProduct = {
@@ -64,7 +207,6 @@ export default function ProductDetail() {
           images: imgObjects,
           brand_id: data.brand._id // vì bạn đang dùng brand_id là string để map
         };
-        
 
         setProduct(cleanProduct);
         setCurrentImg(0);
@@ -163,10 +305,10 @@ export default function ProductDetail() {
             {product.sale_price > 0 && (
 						<>
               <span className="text-red-600 text-2xl font-semibold">
-                {product.price.toLocaleString("vi-VN")}đ
+                {product.sale_price.toLocaleString("vi-VN")}đ
               </span>
               <span className="text-gray-400 line-through text-lg">
-                {product.sale_price.toLocaleString("vi-VN")}đ
+                {product.price.toLocaleString("vi-VN")}đ
               </span>
               <span className="bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
               {Math.round(((product.price - product.sale_price) / product.price) * 100)}%

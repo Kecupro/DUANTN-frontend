@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
+  
   // Hàm lấy user từ API (dùng khi đăng nhập Google hoặc refresh avatar)
   const refreshUser = async () => {
     const token = localStorage.getItem("token");

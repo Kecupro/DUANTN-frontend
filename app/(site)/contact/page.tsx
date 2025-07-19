@@ -39,7 +39,7 @@ export default function ContactPage() {
       if (response.ok) {
         setSubmitStatus('success');
         setSubmitMessage(data.message);
-        setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+    setFormData({ name: '', email: '', phone: '', company: '', message: '' });
       } else {
         setSubmitStatus('error');
         setSubmitMessage(data.message || 'Có lỗi xảy ra khi gửi tin nhắn.');

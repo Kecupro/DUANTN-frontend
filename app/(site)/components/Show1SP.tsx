@@ -14,8 +14,6 @@ interface WishlistItem {
     updated_at: string;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 export default function Show1SP(props: { sp: IProduct }) {
     const sp = props.sp;
 
@@ -25,7 +23,7 @@ export default function Show1SP(props: { sp: IProduct }) {
     
     // Fetch danh sách thương hiệu
     useEffect(() => {
-        fetch(`${API_URL}/api/brand`)
+        fetch("http://localhost:3000/api/brand")
             .then((res) => res.json())
             .then((data) => setBrands(data))
             .catch((err) => console.error("Lỗi fetch brand:", err));
@@ -37,7 +35,7 @@ export default function Show1SP(props: { sp: IProduct }) {
                 const token = localStorage.getItem("token");
                 if (token) {
                     try {
-                        const res = await fetch(`${API_URL}/user/wishlist`, {
+                        const res = await fetch("http://localhost:3000/user/wishlist", {
                             headers: {
                                 'Authorization': `Bearer ${token}`
                             }

@@ -14,8 +14,6 @@ interface SearchSuggestion {
 
 const Height = 40; 
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 const Header = () => {
   const { user, setUser } = useAuth();
   const [scrolled, setScrolled] = useState(false);
@@ -87,7 +85,7 @@ const Header = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL}/api/search/suggestions?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`http://localhost:3000/api/search/suggestions?q=${encodeURIComponent(query)}`);
       const data = await response.json();
       setSearchSuggestions(data.suggestions || []);
     } catch (error) {
@@ -200,7 +198,7 @@ const Header = () => {
               >
                 {user.avatar ? (
                   <img 
-                    src={user.avatar.startsWith('http') ? user.avatar : `${API_URL}/${user.avatar}?t=${new Date().getTime()}`}
+                    src={user.avatar.startsWith('http') ? user.avatar : `http://localhost:3000/${user.avatar}?t=${new Date().getTime()}`}
                     alt="avatar" 
                     width={32} 
                     height={32} 
@@ -228,7 +226,7 @@ const Header = () => {
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <img
-                        src={user.avatar?.startsWith('http') ? user.avatar : `${API_URL}/${user.avatar}?t=${new Date().getTime()}`}
+                        src={user.avatar?.startsWith('http') ? user.avatar : `http://localhost:3000/${user.avatar}?t=${new Date().getTime()}`}
                         alt="avatar"
                         width={48}
                         height={48}
@@ -352,7 +350,7 @@ const Header = () => {
                 >
                   {user.avatar ? (
                     <img 
-                      src={user.avatar.startsWith('http') ? user.avatar : `${API_URL}/${user.avatar}?t=${new Date().getTime()}`} 
+                      src={user.avatar.startsWith('http') ? user.avatar : `http://localhost:3000/${user.avatar}`} 
                       alt="avatar" 
                       width={32} 
                       height={32} 

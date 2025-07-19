@@ -15,7 +15,7 @@ import {
 // FaShoppingCart, FaBell
 
 import { AppProvider, useAppContext } from '../context/AppContext';
-import { AdminAuthProvider, useAdminAuth } from '../context/AdminAuthContext';
+import { AdminAuthProvider, useAdminAuth } from '@/app/(admin)/context/AdminAuthContext'
 import './globals.css';
 
 function LayoutWithSidebarAndHeader({ children }: { children: React.ReactNode }) {

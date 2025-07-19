@@ -25,10 +25,144 @@ export default function ProductSale() {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
     useEffect(() => {
-        fetch(`${API_URL}/api/sp_giam_gia`)
-            .then((res) => res.json())
-            .then((data) => setProducts(data))
-            .catch((err) => console.error("Lỗi fetch sp:", err));
+        // Dữ liệu giả cho sản phẩm sale
+        const mockProducts: IProduct[] = [
+            {
+                _id: "mock_sale_1",
+                brand: { name: "Rolex" },
+                name: "Rolex Submariner Date 126610LN - Đồng hồ lặn cao cấp",
+                description: "Đồng hồ Rolex Submariner Date với thiết kế cổ điển, khả năng chống nước 300m, máy tự động 3235, vỏ thép không gỉ 41mm. Sản phẩm chính hãng 100%, bảo hành toàn cầu 5 năm.",
+                price: 85000000,
+                sale_price: 72000000,
+                status: 1,
+                quantity: 5,
+                views: 1250,
+                sex: "Nam",
+                case_diameter: 41,
+                style: "Thể thao",
+                features: "Chronograph, Lịch ngày, Chống nước",
+                water_resistance: "300m",
+                thickness: 12.5,
+                color: "Đen",
+                machine_type: "Tự động",
+                strap_material: "Dây đeo thép",
+                case_material: "Thép không gỉ",
+                sold: 12,
+                categories: [{ name: "Đồng hồ nam" }],
+                main_image: { 
+                    image: "rolex-submariner-sale.jpg", 
+                    alt: "Rolex Submariner Date 126610LN" 
+                },
+                images: [
+                    { _id: "img1", is_main: true, image: "rolex-submariner-sale.jpg", alt: "Rolex Submariner Date 126610LN" },
+                    { _id: "img2", is_main: false, image: "rolex-submariner-2.jpg", alt: "Rolex Submariner Date 126610LN - Góc nghiêng" },
+                    { _id: "img3", is_main: false, image: "rolex-submariner-3.jpg", alt: "Rolex Submariner Date 126610LN - Mặt sau" }
+                ],
+                created_at: "2024-01-15T10:30:00Z",
+                updated_at: "2024-01-20T14:45:00Z"
+            },
+            {
+                _id: "mock_sale_2",
+                brand: { name: "Omega" },
+                name: "Omega Seamaster Planet Ocean 600M Co-Axial Master Chronometer",
+                description: "Đồng hồ Omega Seamaster Planet Ocean với khả năng chống nước 600m, máy Co-Axial Master Chronometer 8900, vỏ thép 43.5mm. Thiết kế hiện đại, phù hợp cho các hoạt động thể thao dưới nước.",
+                price: 65000000,
+                sale_price: 52000000,
+                status: 1,
+                quantity: 3,
+                views: 890,
+                sex: "Nam",
+                case_diameter: 43.5,
+                style: "Thể thao",
+                features: "Chronograph, Lịch ngày, Chống nước cao",
+                water_resistance: "600m",
+                thickness: 14.5,
+                color: "Xanh dương",
+                machine_type: "Tự động",
+                strap_material: "Dây đeo cao su",
+                case_material: "Thép không gỉ",
+                sold: 8,
+                categories: [{ name: "Đồng hồ nam" }],
+                main_image: { 
+                    image: "omega-seamaster-sale.jpg", 
+                    alt: "Omega Seamaster Planet Ocean" 
+                },
+                images: [
+                    { _id: "img4", is_main: true, image: "omega-seamaster-sale.jpg", alt: "Omega Seamaster Planet Ocean" },
+                    { _id: "img5", is_main: false, image: "omega-seamaster-2.jpg", alt: "Omega Seamaster Planet Ocean - Góc nghiêng" }
+                ],
+                created_at: "2024-01-10T09:15:00Z",
+                updated_at: "2024-01-18T16:20:00Z"
+            },
+            {
+                _id: "mock_sale_3",
+                brand: { name: "Cartier" },
+                name: "Cartier Tank Solo Automatic - Đồng hồ thanh lịch",
+                description: "Đồng hồ Cartier Tank Solo với thiết kế hình chữ nhật độc đáo, máy tự động 1847 MC, vỏ thép 27.4mm x 34.8mm. Phù hợp cho phong cách công sở và các dịp trang trọng.",
+                price: 45000000,
+                sale_price: 36000000,
+                status: 1,
+                quantity: 7,
+                views: 650,
+                sex: "Nữ",
+                case_diameter: 27.4,
+                style: "Cổ điển",
+                features: "Lịch ngày, Dây đeo da",
+                water_resistance: "30m",
+                thickness: 6.6,
+                color: "Bạc",
+                machine_type: "Tự động",
+                strap_material: "Dây đeo da",
+                case_material: "Thép không gỉ",
+                sold: 15,
+                categories: [{ name: "Đồng hồ nữ" }],
+                main_image: { 
+                    image: "cartier-tank-sale.jpg", 
+                    alt: "Cartier Tank Solo Automatic" 
+                },
+                images: [
+                    { _id: "img6", is_main: true, image: "cartier-tank-sale.jpg", alt: "Cartier Tank Solo Automatic" },
+                    { _id: "img7", is_main: false, image: "cartier-tank-2.jpg", alt: "Cartier Tank Solo Automatic - Góc nghiêng" }
+                ],
+                created_at: "2024-01-12T11:45:00Z",
+                updated_at: "2024-01-19T13:30:00Z"
+            },
+            {
+                _id: "mock_sale_4",
+                brand: { name: "Longines" },
+                name: "Longines Heritage Classic - Đồng hồ cổ điển",
+                description: "Đồng hồ Longines Heritage Classic với thiết kế retro, máy tự động L888, vỏ thép 40mm. Lấy cảm hứng từ những mẫu đồng hồ cổ điển của thập niên 1940-1950.",
+                price: 28000000,
+                sale_price: 22400000,
+                status: 1,
+                quantity: 10,
+                views: 420,
+                sex: "Nam",
+                case_diameter: 40,
+                style: "Cổ điển",
+                features: "Lịch ngày, Dây đeo da",
+                water_resistance: "30m",
+                thickness: 11.5,
+                color: "Trắng",
+                machine_type: "Tự động",
+                strap_material: "Dây đeo da",
+                case_material: "Thép không gỉ",
+                sold: 6,
+                categories: [{ name: "Đồng hồ nam" }],
+                main_image: { 
+                    image: "longines-heritage-sale.jpg", 
+                    alt: "Longines Heritage Classic" 
+                },
+                images: [
+                    { _id: "img8", is_main: true, image: "longines-heritage-sale.jpg", alt: "Longines Heritage Classic" },
+                    { _id: "img9", is_main: false, image: "longines-heritage-2.jpg", alt: "Longines Heritage Classic - Góc nghiêng" }
+                ],
+                created_at: "2024-01-08T08:30:00Z",
+                updated_at: "2024-01-16T15:45:00Z"
+            }
+        ];
+
+        setProducts(mockProducts);
     }, []);
 
     // Fetch wishlist status for all products
